@@ -1,0 +1,57 @@
+# Functions
+# function
+snippet fn "const function"
+	const ${1} = (${2}) => ${0:${VISUAL}};
+
+# anon Function
+snippet afn "anonomous function"
+	() => ${0:${VISUAL}};
+
+# map
+snippet map "map iterator"
+	${1:arr}.map((${2}) => ${0:${VISUAL}});
+
+# ternary conditional
+snippet ter Ternary: `condition ? true : false`
+	${1:condition} ? ${2:if} : ${0:else};
+
+# console log
+snippet cl "console.log({ name })"
+	console.log({ ${0} });
+
+# jest test it
+snippet it "jest it"
+	it('${1}', ${2} () => {
+		${0:${VISUAL}}
+	});
+
+# jest describe it
+snippet des "jest describe"
+	describe('${1}', () => {
+		${0:${VISUAL}}
+	});
+
+# const var
+snippet const "const name = value"
+	const ${1} = ${0};
+
+# let var
+snippet let "let name = value"
+	let ${1} = ${0};
+
+# Documentation
+# docstring
+snippet /** "jsdoc structure"
+	/**
+	 * ${1:description}
+	 * ${2}
+	 */
+
+# docstring param
+snippet @param "jsdoc @param"
+	@param {${1:type}} ${2:name} ${0:description}
+
+# docstring return
+snippet @ "jsdoc @return"
+	@return {${1:type}} ${0:description}
+
