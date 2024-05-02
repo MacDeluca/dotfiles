@@ -77,59 +77,8 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# browser support used for rust docs
-export BROWSER='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe'
-
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# scripts
-alias gd='. gd'
-
-# configs
-alias vimconfig="cd ~/.config/nvim && vim ."
-alias alacrittyconfig="vim /mnt/c/Users/MacD/AppData/Roaming/alacritty"
-alias tmuxconfig="vim ~/.config/tmux/tmux.conf"
-alias bashconfig="vim ~/.bashrc"
-
-# neovim
-alias vim='nvim'
-
-# tmux
-alias tmux='tmux -u'
-alias ta='tmux new-session -A -s'
-alias tk='tmux kill-session -t'
-alias tn='session'
-alias :q="exit"
-
-# oc
-oc_port_forward() {
-  oc get pods | tail -n +2 | fzf | cut -d' ' -f1 | xargs -I {} oc port-forward {} "$1":5432
-}
-
-alias oc-projects="oc get projects| tail -n +2 | fzf | cut -d' ' -f1 | xargs oc project"
-alias oc-pf="oc_port_forward"
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -140,10 +89,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+export PATH="$PATH:/opt/nvim-linux64/bin"
 
 export PATH=$PATH:~/scripts:~/tools/openshift-developer-tools/bin:/opt/homebrew/bin:~/.local/bin
 export PATH=/opt/homebrew/bin:$PATH
-export PATH=$PATH:/opt/nvim/
 
 export LC_ALL=en_IN.UTF-8
 export LANG=en_IN.UTF-8
@@ -153,3 +102,4 @@ export NVM_DIR="$HOME/.nvm"
 . "$HOME/.cargo/env"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
