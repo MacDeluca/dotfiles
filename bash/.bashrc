@@ -8,6 +8,9 @@ case $- in
       *) return;;
 esac
 
+# enable vim mode for terminal
+#set -o vi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -57,7 +60,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    #PS1='\[\e[94;1m\]\w\[\e[0m\] \[\e[31;1m\]>\[\e[0m\] '
+    PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)'; PS1='\[\e[32m\][${PS1_CMD1}]\[\e[0m\] \[\e[94;1m\]\w\[\e[0m\] \[\e[31;1m\]>\[\e[0m\] '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -66,7 +71,7 @@ unset color_prompt force_color_prompt
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1=$PS1
     ;;
 *)
     ;;
@@ -84,6 +89,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# browser support used for rust docs
+export BROWSER='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe'
+
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -91,6 +99,33 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+# scripts
+alias gd='. gd'
+
+# configs
+alias vimconfig="cd ~/.config/nvim && vim ."
+alias alacrittyconfig="vim /mnt/c/Users/MacD/AppData/Roaming/alacritty"
+alias tmuxconfig="vim ~/.config/tmux/tmux.conf"
+alias bashconfig="vim ~/.bashrc"
+
+# neovim
+alias vim='nvim'
+
+# tmux
+alias tmux='tmux -u'
+alias ta='tmux new-session -A -s'
+alias tk='tmux kill-session -t'
+alias tn='session'
+alias :q="exit"
+
+# oc
+oc_port_forward() {
+  oc get pods | tail -n +2 | fzf | cut -d' ' -f1 | xargs -I {} oc port-forward {} "$1":5432
+}
+
+alias oc-projects="oc get projects| tail -n +2 | fzf | cut -d' ' -f1 | xargs oc project"
+alias oc-pf="oc_port_forward"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -105,28 +140,16 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
 
-# neovim path
-export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH=$PATH:~/scripts:~/tools/openshift-developer-tools/bin:/opt/homebrew/bin:~/.local/bin
+export PATH=/opt/homebrew/bin:$PATH
+export PATH=$PATH:/opt/nvim/
 
-# catppuccin fzf theme
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export LC_ALL=en_IN.UTF-8
+export LANG=en_IN.UTF-8
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "$HOME/.cargo/env"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
