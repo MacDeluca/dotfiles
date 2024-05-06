@@ -13,9 +13,8 @@ nvm use 18
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
-# neovim
-# make download directory if doesn't already exist
-mkdir -p ~/Downloads
+# neovim - terminal code editor
+mkdir -p ~/Downloads # create Download dir if doesn't already exist
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz --output-dir ~/Downloads
 sudo rm -rf /opt/nvim
 sudo tar -C /opt -xzf ~/Downloads/nvim-linux64.tar.gz

@@ -15,17 +15,23 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
 # scripts
 alias gd='. gd'
 
 # configs
-alias vimconfig="cd ~/dotfiles/.config/nvim && vim ."
+alias vimconfig="cd ~/dotfiles/nvim/.config/nvim && vim ."
 alias alacrittyconfig="vim /mnt/c/Users/MacD/AppData/Roaming/alacritty"
 alias tmuxconfig="vim ~/dotfiles/tmux/.config/tmux/tmux.conf"
-alias bashconfig="vim ~/dotfiles/.bashrc"
+alias bashconfig="vim ~/dotfiles/bash/.bashrc && source ~/.bashrc"
+alias aliasconfig="vim ~/dotfiles/bash/.bash_aliases && source ~/.bashrc"
 
 # neovim
 alias vim='nvim'
+alias v='vim .'
 
 # tmux
 alias tmux='tmux -u'

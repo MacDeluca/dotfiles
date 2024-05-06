@@ -1,0 +1,5 @@
+# Stow ignore list
+
+.git
+install.sh
+README.md
