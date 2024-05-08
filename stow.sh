@@ -8,4 +8,4 @@ echo "Checking for symlink issues..." && \
 echo "$STOW" | xargs stow -n && \
 
 # if successful run stow to symlink
-echo "$STOW" | xargs stow && echo "Stow symlink successful!"
+echo "$STOW" | xargs stow -v 2 && echo "Stow symlink successful!"
