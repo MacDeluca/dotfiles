@@ -29,7 +29,7 @@ vim.opt.breakindent = true
 
 -- Save undo history
 vim.opt.undofile = true
-vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
+vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.opt.ignorecase = true
@@ -70,7 +70,7 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
@@ -85,45 +85,3 @@ vim.opt.laststatus = 3
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
-
--- vim.g.have_nerd_font = true
---
--- vim.opt.nu = true
--- vim.opt.relativenumber = true
---
--- vim.opt.tabstop = 2
--- vim.opt.shiftwidth = 2
--- vim.opt.expandtab = true
---
--- --vim.opt.cursorline = false
---
--- vim.opt.splitright = true
--- vim.opt.splitbelow = true
---
--- vim.opt.wrap = false
---
--- vim.opt.swapfile = false
--- vim.opt.backup = false
--- vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
--- vim.opt.undofile = true
---
--- vim.opt.hlsearch = false
--- vim.opt.incsearch = true
---
--- vim.opt.termguicolors = true
---
--- vim.opt.scrolloff = 8
--- vim.opt.signcolumn = 'yes'
--- vim.opt.isfname:append('@-@')
---
--- vim.opt.colorcolumn = '80'
---
--- vim.opt.laststatus = 3
---
--- vim.opt.ignorecase = true
--- vim.opt.smartcase = true
---
--- vim.opt.updatetime = 250
--- vim.opt.timeoutlen = 300
---
--- vim.opt.hlsearch = false
