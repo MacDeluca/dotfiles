@@ -7,7 +7,7 @@ return {
   },
   config = function()
     -- This is where all the LSP shenanigans will live
-    local lsp_zero = require 'lsp-zero'
+    local lsp_zero = require('lsp-zero')
     lsp_zero.extend_lspconfig()
 
     lsp_zero.on_attach(function(client, bufnr)
@@ -25,12 +25,12 @@ return {
       map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
       map(
         'gv',
-        function() require('telescope.builtin').lsp_definitions { jump_type = 'vsplit' } end,
+        function() require('telescope.builtin').lsp_definitions({ jump_type = 'vsplit' }) end,
         '[G]oto Definition in [V]ertical Split'
       )
       map(
         'gx',
-        function() require('telescope.builtin').lsp_definitions { jump_type = 'xsplit' } end,
+        function() require('telescope.builtin').lsp_definitions({ jump_type = 'xsplit' }) end,
         '[G]oto Definition in Horizontal Split'
       )
 
@@ -69,14 +69,14 @@ return {
       map('<leader>vd', function() vim.diagnostic.open_float() end, '[V]iew [D]iagnostics')
     end)
 
-    require('mason-lspconfig').setup {
+    require('mason-lspconfig').setup({
       ensure_installed = { 'tsserver', 'lua_ls' },
       handlers = {
         lsp_zero.default_setup,
         lua_ls = function()
           -- (Optional) Configure lua language server for neovim
           --local lua_opts = lsp_zero.nvim_lua_ls()
-          require('lspconfig').lua_ls.setup {
+          require('lspconfig').lua_ls.setup({
             settings = {
               Lua = {
                 runtime = { version = 'LuaJIT' },
@@ -98,20 +98,20 @@ return {
                 -- diagnostics = { disable = { 'missing-fields' } },
               },
             },
-          }
+          })
         end,
         tsserver = function()
-          local lspconfig = require 'lspconfig'
-          lspconfig.tsserver.setup {
+          local lspconfig = require('lspconfig')
+          lspconfig.tsserver.setup({
             cmd = { 'typescript-language-server', '--stdio' },
-            root_dir = lspconfig.util.root_pattern '.git',
+            root_dir = lspconfig.util.root_pattern('.git'),
             settings = {
               -- Disable the JSDoc type hint
               diagnostics = { ignoredCodes = { 80004 } },
             },
-          }
+          })
         end,
       },
-    }
+    })
   end,
 }

@@ -2,7 +2,7 @@
 vim.opt.showmode = false
 local gstatus = { ahead = 0, behind = 0 }
 local function update_gstatus()
-  local Job = require 'plenary.job'
+  local Job = require('plenary.job')
 
   Job:new({
     command = 'git',

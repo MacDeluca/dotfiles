@@ -3,8 +3,8 @@ return {
   --dependencies = { 'nvim-tree/nvim-web-devicons' },
   priority = 999,
   config = function()
-    local oil = require 'oil'
-    oil.setup {
+    local oil = require('oil')
+    oil.setup({
       default_file_explorer = true,
       view_options = {
         show_hidden = true,
@@ -21,7 +21,7 @@ return {
         ['-'] = 'actions.parent',
       },
       use_default_keymaps = false,
-    }
+    })
     vim.keymap.set('n', '<leader>pe', function() oil.toggle_float() end, { desc = '[p]roject [e]dit / view' })
   end,
 }

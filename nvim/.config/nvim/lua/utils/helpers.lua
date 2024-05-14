@@ -1,9 +1,9 @@
 local helpers = {}
 
 helpers.create_temp_buffer = function(bufr_fn, filetype)
-  vim.cmd 'vnew'
-  vim.cmd 'set buftype=nofile'
-  vim.cmd 'set bufhidden=delete'
+  vim.cmd('vnew')
+  vim.cmd('set buftype=nofile')
+  vim.cmd('set bufhidden=delete')
   if filetype ~= nil then
     vim.cmd('set filetype=' .. filetype)
   end
@@ -19,6 +19,6 @@ end
 
 helpers.print_table = function(_table) print(table.concat(_table, ', ')) end
 
-helpers.get_word_under_cursor = function() return vim.fn.expand '<cword>' end
+helpers.get_word_under_cursor = function() return vim.fn.expand('<cword>') end
 
 return helpers

@@ -6,10 +6,10 @@ autocmd('TextYankPost', {
   desc = 'quickly highlights yanked text',
   pattern = '*',
   callback = function()
-    vim.highlight.on_yank {
+    vim.highlight.on_yank({
       higroup = 'IncSearch',
       timeout = 50,
-    }
+    })
   end,
 })
 
