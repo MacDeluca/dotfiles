@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Author:   Mac Deluca
+# Date:     30-02-23
+# Purpose:  Queries ITIS Solr service and translates TSN <--> Scientific Name
+# How to:   `echo 180703 | itis` OR `echo alces | itis` OR file.txt | itis
+#
+
+# accept stdin.
+STDIN=$(cat)
+
+# formatted solr query - can return multiple matches.
+ITIS_SOLR="https://services.itis.gov/?wt=json%26json.wrf=callback&q=tsn:(${STDIN// /%20})+nameWOInd:(*${STDIN// /%20}*)"
+
+# using jq to strip / mutate important properties.
+curl -s $ITIS_SOLR |
+  jq '.response.docs[] | {tsn, scientific_name: .nameWOInd, rank, hierarchy: (.hierarchyTSN[0] | gsub("\\$"; " "))}'
+

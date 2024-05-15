@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Author:   Mac Deluca
+# Date:     30-03-24
+# Purpose:  Log selected docker container.
+# How to:   `logs` -> then select container to log.
+#
+# Dependencies:
+#   fzf: https://github.com/junegunn/fzf/
+#   docker: https://www.docker.com/products/docker-desktop/
+#   jq: https://jqlang.github.io/jq/
+#
+
+# use fzf to pick a running container and display preview
+CONTAINER=$(docker ps --all --format 'json' | jq -r '.Names' | fzf --preview "docker logs {} --follow --tail 30" --preview-window up)
+
+# on selection, output logs to terminal
+if [ -n "${CONTAINER}" ]; then
+    docker logs "$CONTAINER" --follow --tail 250 # defaulting to last 250 lines
+fi
