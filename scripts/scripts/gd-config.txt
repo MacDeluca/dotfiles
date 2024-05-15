@@ -1,4 +1,11 @@
-scripts ~/dotfiles/scripts/scripts
 sims-root ~/projects/biohubbc
-test ~/dotfiles/scripts/scripts
 sims-app ~/projects/biohubbc/app
+sims-api ~/projects/biohubbc/api
+sims-db ~/projects/biohubbc/database
+critterbase ~/projects/critterbase-api
+bctw-ui ~/projects/bctw-ui/react
+bctw-api ~/projects/bctw-api/bctw-api
+backbone ~/projects/biohubbc-platform
+scripts ~/dotfiles/scripts/scripts
+dotfiles ~/dotfiles
+neovim ~/dotfiles/nvim/.config/nvim

@@ -45,6 +45,6 @@ elif [ ! -d "$directory" ]; then
 
 # cd into directory
 else
-  cd "$directory" || return 1
+  cd "$directory" && vim . || return 1
 fi
 
