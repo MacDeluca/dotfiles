@@ -1,13 +1,50 @@
 #!/bin/bash
-#
-# Author:   Mac Deluca
-# Date:     20-08-23
-# Purpose:  Helper script for launching common directories
-# How to:   `gd .` OR `gd ~/dir`
-#
 
-# default to projects directory if no arg provided.
-cd ${1:-~/projects}/
+# current directory from ~/
+current_directory=$(dirs +0)
 
-# select and change to directory
-cd $(ls -d */ | fzf)
+# path to directory config script
+config_path="$HOME/dotfiles/scripts/scripts/gd-config.txt"
+
+# add new alias to config file
+# check if -a or --add argument was passed
+if [ "$1" == "-a" ] || [ "$1" == "--add" ]; then
+  echo "adding directory $current_directory"
+  echo -n "alias: "
+  read -r dir
+  echo "$dir $current_directory" >> "$config_path"
+  return 0 # using return to prevent bash script from closing terminal
+fi
+
+# remove alias from config file
+# check if -r or --remove argument was passed
+if [ "$1" == "-r" ] || [ "$1" == "--remove" ]; then
+  remove_index=$(cat -n "$config_path" | fzf --with-nth=2 | awk '{print $1}')
+  if [ -n "$remove_index" ]; then
+    sed -i "${remove_index}d" "$config_path" && echo "removed directory alis"
+  fi
+  exit 0
+fi
+
+# read directory alias mappings from config file
+directory_mappings=$(cat "$config_path")
+
+# display the alias but select the directory
+fzf_selection=$(echo "${directory_mappings[@]}" | fzf --with-nth=1 | cut -d ' ' -f2)
+
+# replace ~/ with $HOME
+directory="${fzf_selection/#\~/$HOME}"
+
+# no fzf selection - exit gracefully
+if [ -z "$directory" ]; then
+  return 0
+
+# invalid directory path - output to stderr
+elif [ ! -d "$directory" ]; then
+  echo "$directory invalid directory" >&2
+
+# cd into directory
+else
+  cd "$directory" || return 1
+fi
+

@@ -5,6 +5,21 @@
 # stow - symlink manager
 sudo apt-get install stow
 
+# cat++
+sudo apt install bat
+
+# install catppuccin theme
+mkdir -p "$HOME/dotfiles/bat/.config/bat/themes"
+wget -P "$HOME/dotfiles/bat/.config/bat/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme
+wget -P "$HOME/dotfiles/bat/.config/bat/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
+wget -P "$HOME/dotfiles/bat/.config/bat/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme
+wget -P "$HOME/dotfiles/bat/.config/bat/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+
+# rebuild cache
+bat cache --build
+
+echo "--theme="Catppuccin Mocha"" > "$HOME/dotfiles/bat/.config/bat/config"
+
 # nvm - node version manager
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm use 18

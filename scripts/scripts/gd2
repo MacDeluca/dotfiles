@@ -12,20 +12,19 @@ if [ "$1" == "-a" ] || [ "$1" == "--add" ]; then
   echo -n "alias: "
   read -r dir
   echo "$dir $current_directory" >> "$config_path"
-  exit 0 # exit successfully
+  $(exit 0)
 fi
-
-echo "$config_path"
 
 # check if -r or --remove argument was passed
 # TODO: something is incorrect with the cat command
-if [ "$1" == "-r" ] || [ "$1" == "--remove" ]; then
-  remove_index=$(cat -n "$config_path" | fzf --with-nth=2 | awk '{print $1}')
-  if [ -n "$remove_index" ]; then
-    sed -i "${remove_index}d" "$config_path" && echo "removed directory alis"
-  fi
-  exit 0
-fi
+#
+#if [ "$1" == "-r" ] || [ "$1" == "--remove" ]; then
+#  remove_index=$(cat -n "$config_path" | fzf --with-nth=2 | awk '{print $1}')
+#  if [ -n "$remove_index" ]; then
+#    sed -i "${remove_index}d" "$config_path" && echo "removed directory alis"
+#  fi
+#  exit 0
+#fi
 
 # read directory alias mappings from config file
 directory_mappings=$(cat gd-config.txt)
@@ -38,7 +37,7 @@ directory="${fzf_selection/#\~/$HOME}"
 
 # no fzf selection - exit gracefully
 if [ -z "$directory" ]; then
-  exit 0
+  return
 
 # invalid directory path - output to stderr
 elif [ ! -d "$directory" ]; then
@@ -48,6 +47,3 @@ elif [ ! -d "$directory" ]; then
 else
   cd "$directory" || exit 1
 fi
-
-exit 0 # exit gracefully
-

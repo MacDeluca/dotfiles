@@ -10,6 +10,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+alias cat='bat'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -21,6 +23,7 @@ alias ....='cd ../../..'
 
 # scripts
 alias gd='. gd'
+alias gdls='cat ~/dotfiles/scripts/scripts/gd-config.txt'
 
 # configs
 alias vimconfig="cd ~/dotfiles/nvim/.config/nvim && vim ."

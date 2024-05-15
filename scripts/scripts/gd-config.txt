@@ -1,1 +1,4 @@
 scripts ~/dotfiles/scripts/scripts
+sims-root ~/projects/biohubbc
+test ~/dotfiles/scripts/scripts
+sims-app ~/projects/biohubbc/app
