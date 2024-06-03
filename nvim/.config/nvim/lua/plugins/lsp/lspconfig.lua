@@ -104,7 +104,7 @@ return {
           local lspconfig = require('lspconfig')
           lspconfig.tsserver.setup({
             cmd = { 'typescript-language-server', '--stdio' },
-            root_dir = lspconfig.util.root_pattern('.git'),
+            root_dir = lspconfig.util.root_pattern('tsconfig.json'),
             settings = {
               -- Disable the JSDoc type hint
               diagnostics = { ignoredCodes = { 80004 } },

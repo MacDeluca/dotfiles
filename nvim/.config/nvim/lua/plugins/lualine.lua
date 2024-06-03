@@ -32,11 +32,11 @@ _G.Gstatus_timer:start(0, 2000, vim.schedule_wrap(update_gstatus))
 
 return {
   'nvim-lualine/lualine.nvim',
-  --dependencies = { { 'nvim-tree/nvim-web-devicons', opt = true } },
+  -- dependencies = { { 'nvim-tree/nvim-web-devicons', opt = true } },
   enabled = true,
   opts = {
     options = {
-      icons_enabled = true,
+      icons_enabled = false,
       section_separators = { left = '', right = '' },
       component_separators = { left = '|', right = '|' },
     },
@@ -46,6 +46,10 @@ return {
         'FugitiveHead',
         'diff',
         function() return gstatus.ahead .. ' ' .. gstatus.behind .. '' end,
+      },
+      lualine_c = {
+        'filename',
+        { 'diagnostics', sources = { 'nvim_diagnostic' } },
       },
       lualine_x = { 'filetype' },
     },

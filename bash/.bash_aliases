@@ -21,6 +21,8 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+alias ld='lazydocker'
+
 # scripts
 alias gd='. gd'
 alias gdls='cat ~/dotfiles/scripts/scripts/gd-config.txt'

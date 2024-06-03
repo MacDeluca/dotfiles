@@ -7,9 +7,16 @@ local plugins = {
   --     ignored_next_char = [=[[%w%%%'%[%"%.%`%{%$]]=],
   --   },
   -- },
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = true,
+    -- use opts = {} for passing setup options
+    -- this is equalent to setup({}) function
+  },
   { 'windwp/nvim-ts-autotag', event = { 'LspAttach' }, opts = {} },
   -- { 'chentoast/marks.nvim', opts = {}, keys = 'm' },
-  { 'numToStr/Comment.nvim', event = { 'LspAttach' }, opts = {} },
+  --{ 'numToStr/Comment.nvim', event = { 'LspAttach' }, opts = {} },
   {
     'kkoomen/vim-doge',
     event = 'VeryLazy',

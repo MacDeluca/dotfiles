@@ -21,7 +21,7 @@ fi
 if [ "$1" == "-r" ] || [ "$1" == "--remove" ]; then
   remove_index=$(cat -n "$config_path" | fzf --with-nth=2 | awk '{print $1}')
   if [ -n "$remove_index" ]; then
-    sed -i "${remove_index}d" "$config_path" && echo "removed directory alis"
+    sed -i "${remove_index}d" "$config_path" && echo "removed directory alias"
   fi
   exit 0
 fi
@@ -45,6 +45,6 @@ elif [ ! -d "$directory" ]; then
 
 # cd into directory
 else
-  cd "$directory" && vim . || return 1
+  cd "$directory" || return 1
 fi
 
