@@ -21,6 +21,7 @@ return {
         },
       },
       defaults = {
+        path_display = { 'smart' },
         mappings = {
           i = {
             ['<C-k>'] = 'move_selection_previous',
@@ -36,7 +37,6 @@ return {
         find_files = {
           file_ignore_patterns = { 'node_modules', '.git', 'package-lock.json' },
           hidden = true,
-          no_ignore = true,
         },
       },
     })

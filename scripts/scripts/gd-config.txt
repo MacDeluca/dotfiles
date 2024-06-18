@@ -1,4 +1,4 @@
-sims-root ~/projects/biohubbc
+sims ~/projects/biohubbc
 sims-app ~/projects/biohubbc/app
 sims-api ~/projects/biohubbc/api
 sims-db ~/projects/biohubbc/database
