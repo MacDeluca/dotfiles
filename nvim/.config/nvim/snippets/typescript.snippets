@@ -5,7 +5,9 @@ snippet fn "const function"
 
 # anon Function
 snippet afn "anonomous function"
-	() => ${0:${VISUAL}};
+	() => {
+    ${0:${VISUAL}}
+  }
 
 # map
 snippet map "map iterator"
@@ -43,8 +45,8 @@ snippet let "let name = value"
 # docstring
 snippet /** "jsdoc structure"
 	/**
-	 * ${1:description}
-	 * ${2}
+	 * ${1:${VISUAL}}
+	 *
 	 */
 
 # docstring param

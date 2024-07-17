@@ -31,8 +31,8 @@ return {
       },
       mapping = cmp.mapping.preset.insert({
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-k>'] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ['<C-j>'] = cmp.mapping.select_next_item(), -- next suggestion
+        ['<C-p>'] = cmp.mapping.select_prev_item(), -- previous suggestion
+        ['<C-n>'] = cmp.mapping.select_next_item(), -- next suggestion
         ['<C-l>'] = cmp_action.luasnip_jump_forward(),
         ['<C-h>'] = cmp_action.luasnip_jump_backward(),
       }),
