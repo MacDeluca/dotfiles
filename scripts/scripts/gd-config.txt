@@ -9,3 +9,4 @@ backbone ~/projects/biohubbc-platform
 scripts ~/dotfiles/scripts/scripts
 dotfiles ~/dotfiles
 neovim ~/dotfiles/nvim/.config/nvim
+todo-api ~/projects/personal/c-sharp/TodoApi

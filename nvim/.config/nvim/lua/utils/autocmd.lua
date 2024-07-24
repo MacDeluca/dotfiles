@@ -25,9 +25,9 @@ autocmd({ 'InsertEnter' }, {
   command = 'silent! normal! ma',
 })
 
-autocmd({ 'BufWinEnter' }, {
-  group = augroup('BetterYankPositionGroup', { clear = true }),
-  desc = 'return cursor to where it was last time closing the file',
-  pattern = '*',
-  command = 'silent! normal! g`"zv zz',
-})
+-- autocmd({ 'BufWinEnter' }, {
+--   group = augroup('BetterYankPositionGroup', { clear = true }),
+--   desc = 'return cursor to where it was last time closing the file',
+--   pattern = '*',
+--   command = 'silent! normal! g`"zv zz',
+-- })

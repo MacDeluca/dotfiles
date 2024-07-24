@@ -14,6 +14,9 @@ return {
     --{ 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   },
   config = function()
+    local builtin = require('telescope.builtin')
+    local conf = require('telescope.config').values
+
     require('telescope').setup({
       extensions = {
         ['ui-select'] = {
@@ -31,11 +34,12 @@ return {
       },
       pickers = {
         live_grep = {
-          file_ignore_patterns = { 'node_modules', '.git', 'package-lock.json' },
+          file_ignore_patterns = { 'node_modules', 'package-lock.json' },
+          vimgrep_arguments = table.insert(conf.vimgrep_arguments, '--fixed-strings'),
           additional_args = function(_) return { '--hidden' } end,
         },
         find_files = {
-          file_ignore_patterns = { 'node_modules', '.git', 'package-lock.json' },
+          file_ignore_patterns = { 'node_modules' },
           hidden = true,
         },
       },
@@ -45,8 +49,6 @@ return {
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
 
-    local builtin = require('telescope.builtin')
-
     -- project actions
     vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = '[P]roject [F]iles' })
     vim.keymap.set('n', '<leader>ps', builtin.live_grep, { desc = '[P]roject [S]earch string' })
@@ -54,6 +56,13 @@ return {
     vim.keymap.set('n', '<leader>pb', builtin.buffers, { desc = '[P]roject [B]uffers' })
     vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = '[P]roject [G]it files' })
     vim.keymap.set('n', '<leader>pk', builtin.keymaps, { desc = '[P]roject [K]ey maps' })
+
+    -- <C-s>: Switch
+    -- <C-y>: Merge
+    -- <C-a>: Create
+    -- <CR>: Checkout
+    -- <C-d>: Delete
+    vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it [B]ranches' })
     vim.keymap.set(
       'n',
       '<leader>ph',

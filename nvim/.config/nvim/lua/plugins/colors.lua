@@ -7,6 +7,7 @@ return {
     custom_highlights = function(colours)
       return {
         TelescopeMatching = { fg = colours.green },
+        CursorLine = { bg = colours.none },
       }
     end,
   },

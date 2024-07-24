@@ -91,6 +91,9 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
 export PATH=$PATH:~/scripts:~/tools/openshift-developer-tools/bin:/opt/homebrew/bin:~/.local/bin
@@ -105,3 +108,4 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH=$HOME/.dotnet/tools:$PATH
