@@ -73,6 +73,7 @@ return {
       ensure_installed = { 'tsserver', 'lua_ls' },
       handlers = {
         lsp_zero.default_setup,
+        gopls = function() require('lspconfig').gopls.setup({}) end,
         lua_ls = function()
           -- (Optional) Configure lua language server for neovim
           --local lua_opts = lsp_zero.nvim_lua_ls()

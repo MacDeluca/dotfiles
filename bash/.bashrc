@@ -108,4 +108,7 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 export PATH=$HOME/.dotnet/tools:$PATH
+
+export PATH=$PATH:/usr/local/go/bin

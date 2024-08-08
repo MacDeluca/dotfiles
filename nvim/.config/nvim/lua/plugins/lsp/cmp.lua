@@ -29,6 +29,8 @@ return {
       snippet = {
         expand = function(args) require('luasnip').lsp_expand(args.body) end,
       },
+      preselect = cmp.PreselectMode.None,
+      completion = { completeopt = 'menu,menuone,noinsert' },
       mapping = cmp.mapping.preset.insert({
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<C-p>'] = cmp.mapping.select_prev_item(), -- previous suggestion
@@ -37,8 +39,8 @@ return {
         ['<C-h>'] = cmp_action.luasnip_jump_backward(),
       }),
       sources = cmp.config.sources({
-        { name = 'luasnip' },
         { name = 'nvim_lsp' },
+        { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
       }),
