@@ -32,7 +32,7 @@ _G.Gstatus_timer:start(0, 2000, vim.schedule_wrap(update_gstatus))
 
 return {
   'nvim-lualine/lualine.nvim',
-  -- dependencies = { { 'nvim-tree/nvim-web-devicons', opt = true } },
+  --dependencies = { { 'nvim-tree/nvim-web-devicons', opt = true } },
   enabled = true,
   opts = {
     options = {

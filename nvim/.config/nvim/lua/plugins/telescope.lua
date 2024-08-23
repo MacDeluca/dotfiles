@@ -42,6 +42,9 @@ return {
           file_ignore_patterns = { 'node_modules' },
           hidden = true,
         },
+        oldfiles = {
+          cwd_only = true,
+        },
       },
     })
 
