@@ -10,10 +10,10 @@ return {
       javascriptreact = { { 'prettierd', 'prettier' } },
       typescriptreact = { { 'prettierd', 'prettier' } },
       bash = { 'shellcheck' },
-      cs = { 'csharpier' },
+      cs = { 'omnisharp', 'csharpier' },
     },
     format_on_save = {
-      timeout_ms = 500,
+      timeout_ms = 1000,
       lsp_fallback = true,
     },
     notify_on_error = false,

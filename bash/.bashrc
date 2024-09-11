@@ -112,3 +112,4 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export PATH=$HOME/.dotnet/tools:$PATH
 
 export PATH=$PATH:/usr/local/go/bin
+[[ -e ~/bin ]] && export PATH=$PATH:~/bin

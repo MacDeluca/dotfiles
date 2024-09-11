@@ -21,6 +21,10 @@ local plugins = {
     event = { 'VeryLazy' },
     version = '*',
     opts = {
+      autoresize = {
+        minheight = 10,
+        minwidth = 30,
+      },
       ui = {
         signcolumn = false,
       },

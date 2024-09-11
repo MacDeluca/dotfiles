@@ -103,7 +103,7 @@ return {
         end,
         tsserver = function()
           local lspconfig = require('lspconfig')
-          lspconfig.tsserver.setup({
+          lspconfig.ts_ls.setup({
             cmd = { 'typescript-language-server', '--stdio' },
             root_dir = lspconfig.util.root_pattern('tsconfig.json'),
             settings = {
