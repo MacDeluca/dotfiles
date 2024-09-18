@@ -3,7 +3,7 @@ local notes = {}
 -- sets the default text for the new note file
 notes.set_note_text = function()
   local format_date = os.date('%A, %m %B %Y')
-  local note_text = { '# Daily Note', format_date, '---', '', '## Todos', '' }
+  local note_text = { '# Daily Note', format_date, '---', '', '## Todos', '', '-' }
   vim.api.nvim_buf_set_lines(0, 0, 0, false, note_text)
 end
 

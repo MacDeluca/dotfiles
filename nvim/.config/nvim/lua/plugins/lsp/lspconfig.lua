@@ -70,7 +70,7 @@ return {
     end)
 
     require('mason-lspconfig').setup({
-      ensure_installed = { 'tsserver', 'lua_ls' },
+      ensure_installed = { 'ts_ls', 'lua_ls' },
       handlers = {
         lsp_zero.default_setup,
         gopls = function() require('lspconfig').gopls.setup({}) end,
@@ -101,7 +101,7 @@ return {
             },
           })
         end,
-        tsserver = function()
+        ts_ls = function()
           local lspconfig = require('lspconfig')
           lspconfig.ts_ls.setup({
             cmd = { 'typescript-language-server', '--stdio' },
