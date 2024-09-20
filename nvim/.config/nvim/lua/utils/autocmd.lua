@@ -25,9 +25,8 @@ autocmd({ 'InsertEnter' }, {
   command = 'silent! normal! ma',
 })
 
--- autocmd({ 'BufWinEnter' }, {
---   group = augroup('BetterYankPositionGroup', { clear = true }),
---   desc = 'return cursor to where it was last time closing the file',
---   pattern = '*',
---   command = 'silent! normal! g`"zv zz',
+-- autocmd({ 'BufWinLeave' }, {
+--   group = augroup('GitDiff Enable Focus', { clear = true }),
+--   pattern = 'fugitive://*',
+--   callback = function() vim.cmd('FocusEnableBuffer') end,
 -- })
