@@ -4,7 +4,6 @@ local plugins = {
     event = 'InsertEnter',
     config = true,
   },
-  --{ 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
   { 'windwp/nvim-ts-autotag', event = { 'LspAttach' }, opts = {} },
   { 'chentoast/marks.nvim', opts = {}, keys = 'm' },
   {
@@ -18,10 +17,17 @@ local plugins = {
   },
   {
     'nvim-focus/focus.nvim',
+    -- TABLE OF CONTENTS:
+    -- PERF:
+    -- HACK:
+    -- TODO:
+    -- NOTE:
+    -- FIX:
+    -- WARNING:
     event = { 'VeryLazy' },
     version = '*',
     opts = {
-      enable = false,
+      enable = true,
       autoresize = {
         minheight = 10,
         minwidth = 30,
