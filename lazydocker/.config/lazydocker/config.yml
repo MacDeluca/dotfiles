@@ -1,0 +1,15 @@
+#
+# Enter to focus main panel
+# Esc to focus containers
+#
+gui:
+  returnImmediately: true # Immediately abort lazy docker when exiting
+  border: "rounded"
+  sidePanelWidth: 0.25 # 25 percent of the width
+  expandFocusedSidePanel: true # Side panels increase in size when selected
+  containerStatusHealthStyle: "short" # Ready -> R Health -> H
+
+logs:
+  timestamps: false # Disable timestamps (makes copying content easier)
+  since: '30m' # Show logs from last 30m
+  tail: 100 # Last 100 lines

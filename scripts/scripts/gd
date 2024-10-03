@@ -30,7 +30,7 @@ fi
 directory_mappings=$(cat "$config_path")
 
 # display the alias but select the directory
-fzf_selection=$(echo "${directory_mappings[@]}" | fzf --with-nth=1 | cut -d ' ' -f2)
+fzf_selection=$(echo "${directory_mappings[@]}" | fzf --with-nth=1 --height 40% --border | cut -d ' ' -f2)
 
 # replace ~/ with $HOME
 directory="${fzf_selection/#\~/$HOME}"
