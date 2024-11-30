@@ -66,9 +66,10 @@ return {
     end)
 
     require('mason-lspconfig').setup({
-      ensure_installed = { 'ts_ls', 'lua_ls' },
+      ensure_installed = { 'ts_ls', 'lua_ls', 'gopls' },
       handlers = {
         lsp_zero.default_setup,
+        -- sqls = function() require('lspconfig').sqls.setup({}) end,
         gopls = function() require('lspconfig').gopls.setup({}) end,
         lua_ls = function()
           -- (Optional) Configure lua language server for neovim

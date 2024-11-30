@@ -26,3 +26,10 @@ autocmd({ 'InsertEnter' }, {
   pattern = '*',
   command = 'silent! normal! ma',
 })
+
+-- Set commentstring for sql files
+autocmd({ 'FileType' }, {
+  group = augroup('SQLCommentString', { clear = true }),
+  pattern = 'sql',
+  callback = function(event) vim.bo[event.buf].commentstring = '-- %s' end,
+})

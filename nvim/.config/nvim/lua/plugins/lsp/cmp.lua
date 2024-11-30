@@ -59,5 +59,12 @@ return {
       }),
       matching = { disallow_symbol_nonprefix_matching = false },
     })
+
+    cmp.setup.filetype({ 'sql' }, {
+      sources = {
+        { name = 'vim-dadbod-completion' },
+        { name = 'buffer' },
+      },
+    })
   end,
 }

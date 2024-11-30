@@ -94,7 +94,8 @@ fi
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
-export PATH="$PATH:/opt/nvim-linux64/bin"
+#https://github.com/neovim/neovim/blob/master/INSTALL.md
+export PATH="$PATH:/opt/nvim"
 
 export PATH=$PATH:~/scripts:~/tools/openshift-developer-tools/bin:/opt/homebrew/bin:~/.local/bin
 export PATH=/opt/homebrew/bin:$PATH
