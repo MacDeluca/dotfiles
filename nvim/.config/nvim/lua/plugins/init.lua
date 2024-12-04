@@ -24,7 +24,6 @@ local plugins = {
   { 'chentoast/marks.nvim', opts = {}, keys = 'm' },
   {
     'kkoomen/vim-doge',
-    event = 'VeryLazy',
     build = ':call doge#install()',
     config = function()
       vim.g.doge_mapping_comment_jump_forward = '<C-n>'
@@ -33,13 +32,6 @@ local plugins = {
   },
   {
     'nvim-focus/focus.nvim',
-    -- TABLE OF CONTENTS:
-    -- PERF:
-    -- HACK:
-    -- TODO:
-    -- NOTE:
-    -- FIX:
-    -- WARNING:
     event = { 'VeryLazy' },
     version = '*',
     opts = {
@@ -54,6 +46,13 @@ local plugins = {
     },
   },
   {
+    -- TABLE OF CONTENTS:
+    -- PERF:
+    -- HACK:
+    -- TODO:
+    -- NOTE:
+    -- FIX:
+    -- WARNING:
     'folke/todo-comments.nvim',
     event = 'VeryLazy',
     dependencies = { 'nvim-lua/plenary.nvim' },

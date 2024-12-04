@@ -67,6 +67,9 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- preventing text from bouncing around
 vim.opt.wrap = false
 
+-- Status line
+vim.o.statusline = [[ %<%f %h%m%r %= %-14.(%l:%c%V%) %{FugitiveStatusline()}]]
+
 -- Enables single statusline at bottom of scren
 vim.opt.laststatus = 3
 

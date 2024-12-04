@@ -15,6 +15,7 @@ return {
   },
   config = function()
     local builtin = require('telescope.builtin')
+    local actions = require('telescope.actions')
     local conf = require('telescope.config').values
 
     require('telescope').setup({
@@ -27,6 +28,7 @@ return {
         path_display = { 'smart' },
         mappings = {
           i = {
+            ['<esc>'] = actions.close,
             ['<C-k>'] = 'move_selection_previous',
             ['<C-j>'] = 'move_selection_next',
           },
