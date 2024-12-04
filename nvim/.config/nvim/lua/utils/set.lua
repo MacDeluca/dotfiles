@@ -60,15 +60,11 @@ vim.opt.scrolloff = 10
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
-
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Disables line wrapping when switching between windows
 -- preventing text from bouncing around
 vim.opt.wrap = false
-
--- Status line
-vim.o.statusline = [[ %<%f %h%m%r %= %-14.(%l:%c%V%) %{FugitiveStatusline()}]]
 
 -- Enables single statusline at bottom of scren
 vim.opt.laststatus = 3
@@ -77,3 +73,16 @@ vim.opt.laststatus = 3
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+
+-- Minimal status line
+function StatusLine()
+  local branch = vim.fn.FugitiveHead()
+
+  if branch and #branch > 0 then
+    branch = '  ' .. branch
+  end
+
+  return '%#StatusLine#' .. branch .. ' ✿ %t %m%=%l:%c'
+end
+
+vim.opt.statusline = [[%!luaeval('StatusLine()')]]

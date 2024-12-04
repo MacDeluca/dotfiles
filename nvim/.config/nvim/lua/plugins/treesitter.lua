@@ -3,6 +3,7 @@ return {
   build = ':TSUpdate',
   config = function()
     local configs = require('nvim-treesitter.configs')
+    ---@diagnostic disable-next-line: missing-fields
     configs.setup({
       -- A list of parser names, or "all" (the five listed parsers should always be installed)
       ensure_installed = { 'c', 'lua', 'javascript', 'rust', 'vimdoc', 'typescript', 'python', 'jsdoc', 'go' },
