@@ -10,6 +10,8 @@ return {
         debounce = 25,
         keymap = {
           accept = '<C-y>',
+          next = '<C-n>',
+          prev = '<C-p>',
         },
       },
     })

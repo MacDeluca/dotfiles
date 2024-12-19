@@ -37,6 +37,7 @@ return {
         ['<C-n>'] = cmp.mapping.select_next_item(), -- next suggestion
         ['<C-l>'] = cmp_action.luasnip_jump_forward(),
         ['<C-h>'] = cmp_action.luasnip_jump_backward(),
+        ['<C-e>'] = cmp.mapping.abort(),
         ['<C-y>'] = function()
           cmp.mapping.abort()
           require('copilot.suggestion').accept()

@@ -23,6 +23,7 @@ return {
         ['ui-select'] = {
           require('telescope.themes').get_cursor(),
         },
+        fzf = {},
       },
       defaults = {
         path_display = { 'smart' },
@@ -36,7 +37,7 @@ return {
       },
       pickers = {
         live_grep = {
-          file_ignore_patterns = { 'node_modules', 'package-lock.json' },
+          file_ignore_patterns = { 'node_modules', 'package-lock.json', '.git' },
           vimgrep_arguments = table.insert(conf.vimgrep_arguments, '--fixed-strings'),
           additional_args = function(_) return { '--hidden' } end,
         },
@@ -51,8 +52,8 @@ return {
     })
 
     -- Enable telescope extensions, if they are installed
-    pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
+    pcall(require('telescope').load_extension, 'fzf')
 
     -- project actions
     vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = '[P]roject [F]iles' })
@@ -61,13 +62,11 @@ return {
     vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = '[P]roject [G]it files' })
     vim.keymap.set('n', '<leader>pk', builtin.keymaps, { desc = '[P]roject [K]ey maps' })
     vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Buffers' })
-
-    -- <C-s>: Switch
-    -- <C-y>: Merge
-    -- <C-a>: Create
-    -- <CR>: Checkout
-    -- <C-d>: Delete
     vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it [B]ranches' })
+
+    -- Custom Pickers
+
+    -- History picker
     vim.keymap.set(
       'n',
       '<leader>ph',
@@ -75,12 +74,27 @@ return {
       { desc = '[P]roject [H]istory' }
     )
 
-    -- Slightly advanced example of overriding default behavior and theme
+    -- Fuzzy buffer search
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to telescope to change theme, layout, etc.
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_ivy({
-        previewer = true,
-      }))
+      -- builtin.current_buffer_fuzzy_find(require('telescope.themes').get_ivy({
+      --   previewer = true,
+      -- }))
+      builtin.current_buffer_fuzzy_find()
     end, { desc = '[/] Fuzzily search in current buffer' })
+
+    -- Notes picker
+    vim.keymap.set(
+      'n',
+      '<leader>n',
+      function()
+        builtin.find_files({
+          prompt_title = 'Notes',
+          cwd = '~/notes',
+          hidden = true,
+        })
+      end,
+      { desc = '[N]otes' }
+    )
   end,
 }

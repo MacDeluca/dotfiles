@@ -33,8 +33,8 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
 
--- Decrease update time
-vim.opt.updatetime = 250
+-- Default update time :help updatetime
+vim.opt.updatetime = 4000
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
@@ -66,23 +66,34 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- preventing text from bouncing around
 vim.opt.wrap = false
 
--- Enables single statusline at bottom of scren
-vim.opt.laststatus = 3
-
 -- Better tab settings
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
--- Minimal status line
+-- Enables single statusline at bottom of scren
+vim.opt.laststatus = 3
+
+--Minimal status line
 function StatusLine()
   local branch = vim.fn.FugitiveHead()
+  -- #vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.WARN } }) -- get all diagnostics with severity of warning or higher
+  local fileDiagnostics = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+  local file = ' ✿ %t'
+  local lines = ' %l:%c'
+  local meta = ' %m'
+  local separator = '%='
+  local diagnostics = ''
 
   if branch and #branch > 0 then
     branch = '  ' .. branch
   end
 
-  return '%#StatusLine#' .. branch .. ' ✿ %t %m%=%l:%c'
+  if fileDiagnostics > 0 then
+    diagnostics = '   ' .. fileDiagnostics
+  end
+
+  return branch .. file .. meta .. diagnostics .. separator .. lines
 end
 
 vim.opt.statusline = [[%!luaeval('StatusLine()')]]

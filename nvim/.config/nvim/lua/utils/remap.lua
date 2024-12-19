@@ -25,7 +25,10 @@ vim.keymap.set(
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.reset, { desc = '[D]iagnostic [R]eset' })
+vim.keymap.set('n', '<leader>e', function()
+  vim.diagnostic.reset()
+  vim.Cmd('LspRestart')
+end, { desc = '[D]iagnostic [R]eset' })
 
 --traverse found searches up / down
 vim.keymap.set('n', 'N', 'Nzzzv')
