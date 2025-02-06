@@ -23,14 +23,6 @@ local plugins = {
   { 'windwp/nvim-ts-autotag', event = { 'LspAttach' }, opts = {} },
   { 'chentoast/marks.nvim', opts = {}, keys = 'm' },
   {
-    'kkoomen/vim-doge',
-    build = ':call doge#install()',
-    config = function()
-      vim.g.doge_mapping_comment_jump_forward = '<C-n>'
-      vim.g.doge_mapping_comment_jump_backward = '<C-p>'
-    end,
-  },
-  {
     'nvim-focus/focus.nvim',
     event = { 'VeryLazy' },
     version = '*',

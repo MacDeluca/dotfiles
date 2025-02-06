@@ -63,8 +63,9 @@ if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     #PS1='\[\e[94;1m\]\w\[\e[0m\] \[\e[31;1m\]>\[\e[0m\] '
     #PS1='\[\e[32m\][${PS1_CMD1}]\[\e[0m\] \[\e[94;1m\]\w\[\e[0m\] \[\e[31;1m\]>\[\e[0m\] '
-    PS1='\[\e[32m\][${PS1_CMD1}]\[\e[0m\] \[\e[94;1m\]\w\[\e[0m\] \[\e[31;1m\]>\[\e[0m\] '
-    PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)';
+    #PS1='\[\e[32m\][${PS1_CMD1}]\[\e[0m\] \[\e[94;1m\]\w\[\e[0m\] \[\e[31;1m\]>\[\e[0m\] '
+    PS1='\[\e[94;1m\]\w\[\e[0m\] \[\e[31;1m\]>\[\e[0m\] '
+    #PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)';
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi

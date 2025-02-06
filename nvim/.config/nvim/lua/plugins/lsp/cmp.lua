@@ -27,7 +27,7 @@ return {
     cmp.setup({
       formatting = lsp_zero.cmp_format(),
       snippet = {
-        expand = function(args) require('luasnip').lsp_expand(args.body) end,
+        expand = function(args) vim.snippet.expand(args.body) end,
       },
       preselect = cmp.PreselectMode.None,
       --completion = { completeopt = 'menu,menuone,noinsert' },

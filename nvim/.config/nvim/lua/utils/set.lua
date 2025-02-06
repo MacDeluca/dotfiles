@@ -49,7 +49,7 @@ vim.opt.inccommand = 'split'
 
 -- -- Show which line your cursor is on
 --
--- vim.opt.cursorline = false
+-- vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 
@@ -74,26 +74,24 @@ vim.opt.expandtab = true
 -- Enables single statusline at bottom of scren
 vim.opt.laststatus = 3
 
---Minimal status line
+-- Minimal status line
 function StatusLine()
   local branch = vim.fn.FugitiveHead()
-  -- #vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.WARN } }) -- get all diagnostics with severity of warning or higher
+
   local fileDiagnostics = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-  local file = ' ✿ %t'
-  local lines = ' %l:%c'
-  local meta = ' %m'
-  local separator = '%='
+  local right = '%= %l:%c '
+  local left = '🔮 %t %m' --✿
   local diagnostics = ''
 
   if branch and #branch > 0 then
-    branch = '  ' .. branch
+    branch = '  ' .. branch .. ' '
   end
 
   if fileDiagnostics > 0 then
-    diagnostics = '   ' .. fileDiagnostics
+    diagnostics = diagnostics .. '   ' .. fileDiagnostics
   end
 
-  return branch .. file .. meta .. diagnostics .. separator .. lines
+  return branch .. left .. diagnostics .. right
 end
 
 vim.opt.statusline = [[%!luaeval('StatusLine()')]]

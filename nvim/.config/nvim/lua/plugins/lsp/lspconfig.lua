@@ -1,112 +1,114 @@
+-- LSP
 return {
   'neovim/nvim-lspconfig',
-  event = { 'VeryLazy' },
+  cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     { 'hrsh7th/cmp-nvim-lsp' },
+    { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
   },
+  init = function()
+    -- Reserve a space in the gutter
+    -- This will avoid an annoying layout shift in the screen
+    vim.opt.signcolumn = 'yes'
+  end,
   config = function()
-    -- This is where all the LSP shenanigans will live
-    local lsp_zero = require('lsp-zero')
-    lsp_zero.extend_lspconfig()
+    local lsp_defaults = require('lspconfig').util.default_config
 
-    lsp_zero.on_attach(function(client, bufnr)
-      -- see :help lsp-zero-keybindings
-      -- to learn the available actions
-      --lsp_zero.default_keymaps({ buffer = bufnr })
-      --local opts = { noremap = true, silent = true, buffer = bufnr }
+    -- Add cmp_nvim_lsp capabilities settings to lspconfig
+    -- This should be executed before you configure any language server
+    lsp_defaults.capabilities =
+      vim.tbl_deep_extend('force', lsp_defaults.capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-      local map = function(keys, func, desc)
-        vim.keymap.set('n', keys, func, { noremap = true, buffer = bufnr, silent = true, desc = 'LSP: ' .. desc })
-      end
-      -- Jump to the definition of the word under your cursor.
-      --  This is where a variable was first declared, or where a function is defined, etc.
-      --  To jump back, press <C-t>.
-      map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-      map(
-        'gv',
-        function() require('telescope.builtin').lsp_definitions({ jump_type = 'vsplit' }) end,
-        '[G]oto Definition in [V]ertical Split'
-      )
-      map(
-        'gx',
-        function() require('telescope.builtin').lsp_definitions({ jump_type = 'xsplit' }) end,
-        '[G]oto Definition in Horizontal Split'
-      )
+    -- LspAttach is where you enable features that only work
+    -- if there is a language server active in the file
+    vim.api.nvim_create_autocmd('LspAttach', {
+      desc = 'LSP actions',
+      callback = function(event)
+        local opts = { buffer = event.buf }
 
-      -- Find references for the word under your cursor.
-      map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        -- Hover
+        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
 
-      -- Jump to the implementation of the word under your cursor.
-      --  Useful when your language has ways of declaring types without an actual implementation.
-      --map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+        -- Code actions
+        vim.keymap.set('n', '<leader>k', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 
-      -- Jump to the type of the word under your cursor.
-      --  Useful when you're not sure what type a variable is and you want to see
-      --  the definition of its *type*, not where it was *defined*.
-      map('T', require('telescope.builtin').lsp_type_definitions, '[T]ype definition')
+        -- View diagnostics
+        vim.keymap.set('n', '<leader>vd', '<cmd> lua vim.diagnostic.open_float()<cr>', opts)
 
-      -- Fuzzy find all the symbols in your current workspace
-      --  Similar to document symbols, except searches over your whole project.
-      --map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+        -- Go to definition, type definition, and references
+        vim.keymap.set('n', 'gv', function() require('telescope.builtin').lsp_definitions({ jump_type = 'vsplit' }) end)
+        vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end, opts)
+        vim.keymap.set('n', 'gt', function() require('telescope.builtin').lsp_type_definitions() end, opts)
+        vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
 
-      -- Rename the variable under your cursor
-      --  Most Language Servers support renaming across files, etc.
-      map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        -- Signature help
+        vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
 
-      -- Execute a code action, usually your cursor needs to be on top of an error
-      -- or a suggestion from your LSP for this to activate.
-      map('<leader>k', vim.lsp.buf.code_action, '[C]ode [A]ction')
+        -- Rename
+        vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+      end,
+    })
 
-      -- Opens a popup that displays documentation about the word under your cursor
-      --  See `:help K` for why this keymap
-      map('K', vim.lsp.buf.hover, 'Hover Documentation')
-
-      map('<leader>vd', function() vim.diagnostic.open_float() end, '[V]iew [D]iagnostics')
-    end)
-
+    ---@diagnostic disable-next-line: missing-fields
     require('mason-lspconfig').setup({
-      ensure_installed = { 'ts_ls', 'lua_ls', 'gopls' },
+      ensure_installed = { 'lua_ls' },
       handlers = {
-        lsp_zero.default_setup,
-        -- sqls = function() require('lspconfig').sqls.setup({}) end,
-        gopls = function() require('lspconfig').gopls.setup({}) end,
+        -- this first function is the "default handler"
+        -- it applies to every language server without a "custom handler"
+        function(server_name) require('lspconfig')[server_name].setup({}) end,
+        ---                 ---
+        --- CUSTOM HANDLERS ---
+        ---                 ---
+        eslint = function() require('lspconfig').eslint.setup({}) end,
+
+        -- Lua language server custom handler
         lua_ls = function()
-          -- (Optional) Configure lua language server for neovim
-          --local lua_opts = lsp_zero.nvim_lua_ls()
           require('lspconfig').lua_ls.setup({
             settings = {
               Lua = {
-                runtime = { version = 'LuaJIT' },
-                workspace = {
-                  checkThirdParty = false,
-                  -- Tells lua_ls where to find all the Lua files that you have loaded
-                  -- for your neovim configuration.
-                  library = {
-                    '${3rd}/luv/library',
-                    unpack(vim.api.nvim_get_runtime_file('', true)),
-                  },
-                  -- If lua_ls is really slow on your computer, you can try this instead:
-                  -- library = { vim.env.VIMRUNTIME },
+                telemetry = {
+                  enable = false,
                 },
-                completion = {
-                  callSnippet = 'Replace',
-                },
-                -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                -- diagnostics = { disable = { 'missing-fields' } },
               },
             },
-          })
-        end,
-        ts_ls = function()
-          local lspconfig = require('lspconfig')
-          lspconfig.ts_ls.setup({
-            cmd = { 'typescript-language-server', '--stdio' },
-            root_dir = lspconfig.util.root_pattern('tsconfig.json'),
-            settings = {
-              -- Disable the JSDoc type hint
-              diagnostics = { ignoredCodes = { 80004 } },
-            },
+            on_init = function(client)
+              local join = vim.fs.joinpath
+              local path = client.workspace_folders[1].name
+
+              -- Don't do anything if there is project local config
+              if vim.uv.fs_stat(join(path, '.luarc.json')) or vim.uv.fs_stat(join(path, '.luarc.jsonc')) then
+                return
+              end
+
+              -- Apply neovim specific settings
+              local runtime_path = vim.split(package.path, ';')
+              table.insert(runtime_path, join('lua', '?.lua'))
+              table.insert(runtime_path, join('lua', '?', 'init.lua'))
+
+              local nvim_settings = {
+                runtime = {
+                  -- Tell the language server which version of Lua you're using
+                  version = 'LuaJIT',
+                  path = runtime_path,
+                },
+                diagnostics = {
+                  -- Get the language server to recognize the `vim` global
+                  globals = { 'vim' },
+                },
+                workspace = {
+                  checkThirdParty = false,
+                  library = {
+                    -- Make the server aware of Neovim runtime files
+                    vim.env.VIMRUNTIME,
+                    vim.fn.stdpath('config'),
+                  },
+                },
+              }
+
+              client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, nvim_settings)
+            end,
           })
         end,
       },

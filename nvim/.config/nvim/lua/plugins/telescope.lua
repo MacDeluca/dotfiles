@@ -75,13 +75,12 @@ return {
     )
 
     -- Fuzzy buffer search
-    vim.keymap.set('n', '<leader>/', function()
-      -- You can pass additional configuration to telescope to change theme, layout, etc.
-      -- builtin.current_buffer_fuzzy_find(require('telescope.themes').get_ivy({
-      --   previewer = true,
-      -- }))
-      builtin.current_buffer_fuzzy_find()
-    end, { desc = '[/] Fuzzily search in current buffer' })
+    vim.keymap.set(
+      'n',
+      '<leader>/',
+      function() builtin.current_buffer_fuzzy_find() end,
+      { desc = '[/] Fuzzily search in current buffer' }
+    )
 
     -- Notes picker
     vim.keymap.set(

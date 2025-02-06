@@ -12,4 +12,4 @@ gui:
 logs:
   timestamps: false # Disable timestamps (makes copying content easier)
   since: '30m' # Show logs from last 30m
-  tail: 100 # Last 100 lines
+  tail: 200 # Last 100 lines
