@@ -37,11 +37,11 @@ return {
         -- View diagnostics
         vim.keymap.set('n', '<leader>vd', '<cmd> lua vim.diagnostic.open_float()<cr>', opts)
 
-        -- Go to definition, type definition, and references
-        vim.keymap.set('n', 'gv', function() require('telescope.builtin').lsp_definitions({ jump_type = 'vsplit' }) end)
-        vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end, opts)
-        vim.keymap.set('n', 'gt', function() require('telescope.builtin').lsp_type_definitions() end, opts)
-        vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+        -- -- Go to definition, type definition, and references
+        -- vim.keymap.set('n', 'gv', function() require('telescope.builtin').lsp_definitions({ jump_type = 'vsplit' }) end)
+        -- vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end, opts)
+        -- vim.keymap.set('n', 'gt', function() require('telescope.builtin').lsp_type_definitions() end, opts)
+        -- vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
 
         -- Signature help
         vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)

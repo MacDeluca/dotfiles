@@ -4,13 +4,13 @@ return {
   opts = {
     formatters_by_ft = {
       lua = { 'stylua' },
-      python = { 'black', 'isort' },
-      javascript = { { 'prettierd' } },
-      typescript = { { 'prettierd' } },
-      javascriptreact = { { 'prettierd' } },
-      typescriptreact = { { 'prettierd' } },
+      python = { 'black' },
+      javascript = { 'prettierd' },
+      typescript = { 'prettierd' },
+      javascriptreact = { 'prettierd' },
+      typescriptreact = { 'prettierd' },
       bash = { 'shellcheck' },
-      cs = { 'csharpier', 'omnisharp' },
+      cs = { 'csharpier' },
     },
     default_format_opts = {
       lsp_format = 'format',

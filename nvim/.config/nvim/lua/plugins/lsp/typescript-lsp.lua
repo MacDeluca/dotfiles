@@ -11,6 +11,11 @@ return {
           { 80004 }
         ),
       },
+      settings = {
+        tsserver_file_preferences = {
+          includeInlayParameterNameHints = 'all',
+        },
+      },
     })
   end,
 }
