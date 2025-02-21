@@ -35,6 +35,7 @@ return {
       { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },
       { '<leader>pf', function() Snacks.picker.files({ hidden = true }) end, desc = 'Find Files' },
       { '<leader>ph', function() Snacks.picker.recent() end, desc = 'Recent' },
+      {'<leader>pn', function() Snacks.picker.files({ dirs = { "~/notes" }}) end, desc = 'Notes'},
 
       -- Search in files and buffers
       { '<leader>ps', function() Snacks.picker.grep({ hidden = true }) end, desc = 'Grep' },

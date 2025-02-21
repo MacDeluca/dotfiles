@@ -4,7 +4,8 @@ return {
   cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'saghen/blink.cmp' },
+    -- { 'hrsh7th/cmp-nvim-lsp' },
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
   },
@@ -14,12 +15,12 @@ return {
     vim.opt.signcolumn = 'yes'
   end,
   config = function()
-    local lsp_defaults = require('lspconfig').util.default_config
+    -- local lsp_defaults = require('lspconfig').util.default_config
 
-    -- Add cmp_nvim_lsp capabilities settings to lspconfig
-    -- This should be executed before you configure any language server
-    lsp_defaults.capabilities =
-      vim.tbl_deep_extend('force', lsp_defaults.capabilities, require('cmp_nvim_lsp').default_capabilities())
+    -- -- Add cmp_nvim_lsp capabilities settings to lspconfig
+    -- -- This should be executed before you configure any language server
+    -- lsp_defaults.capabilities =
+    --   vim.tbl_deep_extend('force', lsp_defaults.capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     -- LspAttach is where you enable features that only work
     -- if there is a language server active in the file
@@ -51,21 +52,24 @@ return {
       end,
     })
 
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
+
     ---@diagnostic disable-next-line: missing-fields
     require('mason-lspconfig').setup({
       ensure_installed = { 'lua_ls' },
       handlers = {
         -- this first function is the "default handler"
         -- it applies to every language server without a "custom handler"
-        function(server_name) require('lspconfig')[server_name].setup({}) end,
+        function(server_name) require('lspconfig')[server_name].setup({ capabilities = capabilities }) end,
         ---                 ---
         --- CUSTOM HANDLERS ---
         ---                 ---
-        eslint = function() require('lspconfig').eslint.setup({}) end,
+        eslint = function() require('lspconfig').eslint.setup({ capabilities = capabilities }) end,
 
         -- Lua language server custom handler
         lua_ls = function()
           require('lspconfig').lua_ls.setup({
+            capabilities = capabilities,
             settings = {
               Lua = {
                 telemetry = {
