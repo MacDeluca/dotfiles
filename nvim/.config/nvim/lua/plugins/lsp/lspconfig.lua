@@ -15,14 +15,6 @@ return {
     vim.opt.signcolumn = 'yes'
   end,
   config = function()
-    -- local lsp_defaults = require('lspconfig').util.default_config
-
-    -- -- Add cmp_nvim_lsp capabilities settings to lspconfig
-    -- -- This should be executed before you configure any language server
-    -- lsp_defaults.capabilities =
-    --   vim.tbl_deep_extend('force', lsp_defaults.capabilities, require('cmp_nvim_lsp').default_capabilities())
-
-    -- LspAttach is where you enable features that only work
     -- if there is a language server active in the file
     vim.api.nvim_create_autocmd('LspAttach', {
       desc = 'LSP actions',
@@ -30,25 +22,13 @@ return {
         local opts = { buffer = event.buf }
 
         -- Hover
-        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
         -- Code actions
-        vim.keymap.set('n', '<leader>k', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-
+        vim.keymap.set('n', '<leader>k', vim.lsp.buf.code_action, opts)
         -- View diagnostics
-        vim.keymap.set('n', '<leader>vd', '<cmd> lua vim.diagnostic.open_float()<cr>', opts)
-
-        -- -- Go to definition, type definition, and references
-        -- vim.keymap.set('n', 'gv', function() require('telescope.builtin').lsp_definitions({ jump_type = 'vsplit' }) end)
-        -- vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end, opts)
-        -- vim.keymap.set('n', 'gt', function() require('telescope.builtin').lsp_type_definitions() end, opts)
-        -- vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-
-        -- Signature help
-        vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-
+        vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
         -- Rename
-        vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
       end,
     })
 
