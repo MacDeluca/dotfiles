@@ -12,3 +12,4 @@ neovim ~/dotfiles/nvim/.config/nvim
 todo-api ~/projects/personal/c-sharp/TodoApi
 recipeVault ~/projects/personal/recipeVault
 chat-copilot ~/projects/chat-copilot
+portfolio ~/projects/personal/portfolio
