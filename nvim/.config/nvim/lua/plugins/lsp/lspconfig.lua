@@ -46,6 +46,19 @@ return {
         ---                 ---
         eslint = function() require('lspconfig').eslint.setup({ capabilities = capabilities }) end,
 
+        ts_ls = function()
+          local lspconfig = require('lspconfig')
+          lspconfig.ts_ls.setup({
+            cmd = { 'typescript-language-server', '--stdio' },
+
+            root_dir = lspconfig.util.root_pattern('tsconfig.json'),
+            settings = {
+              -- Disable the JSDoc type hint
+              diagnostics = { ignoredCodes = { 80004 } },
+            },
+          })
+        end,
+
         -- Lua language server custom handler
         lua_ls = function()
           require('lspconfig').lua_ls.setup({

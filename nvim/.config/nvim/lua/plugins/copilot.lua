@@ -14,6 +14,10 @@ return {
           prev = '<C-p>',
         },
       },
+      filetypes = {
+        yaml = true,
+        markdown = true,
+      },
     })
   end,
 }

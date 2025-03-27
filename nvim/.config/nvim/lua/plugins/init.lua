@@ -21,7 +21,6 @@ local plugins = {
     config = true,
   },
   { 'windwp/nvim-ts-autotag', event = { 'LspAttach' }, opts = {} },
-  --{ 'chentoast/marks.nvim', opts = {}, keys = 'm' },
   {
     'nvim-focus/focus.nvim',
     event = { 'VeryLazy' },
@@ -34,6 +33,7 @@ local plugins = {
       },
       ui = {
         signcolumn = false,
+        cursorline = false,
       },
     },
   },

@@ -3,6 +3,12 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
+    styles = {
+      float = {
+        -- Do not dim the background
+        backdrop = 100,
+      },
+    },
     bigfile = { enabled = true },
     picker = {
       prompt = '🔮 ',

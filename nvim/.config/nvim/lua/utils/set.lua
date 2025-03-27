@@ -74,27 +74,27 @@ vim.opt.expandtab = true
 -- Enables single statusline at bottom of scren
 vim.opt.laststatus = 3
 
--- Minimal status line
-function StatusLine()
-  local branch = vim.fn.FugitiveHead()
-
-  local fileDiagnostics = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-  local right = '%= %l:%c '
-  local left = '🔮 %t %m' --✿
-  local diagnostics = ''
-
-  if branch and #branch > 0 then
-    branch = '  ' .. branch .. ' '
-  end
-
-  if fileDiagnostics > 0 then
-    diagnostics = diagnostics .. '   ' .. fileDiagnostics
-  end
-
-  return branch .. left .. diagnostics .. right
-end
-
-vim.opt.statusline = [[%!luaeval('StatusLine()')]]
+-- -- Minimal status line
+-- function StatusLine()
+--   local branch = vim.fn.FugitiveHead()
+--
+--   local fileDiagnostics = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+--   local right = '%= %l:%c '
+--   local left = '🔮 %t %m' --✿
+--   local diagnostics = ''
+--
+--   if branch and #branch > 0 then
+--     branch = '  ' .. branch .. ' '
+--   end
+--
+--   if fileDiagnostics > 0 then
+--     diagnostics = diagnostics .. '   ' .. fileDiagnostics
+--   end
+--
+--   return branch .. left .. diagnostics .. right
+-- end
+--
+-- vim.opt.statusline = [[%!luaeval('StatusLine()')]]
 
 -- Specify how the floating borders look
 local border = {

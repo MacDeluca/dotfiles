@@ -3,6 +3,7 @@ return {
   'saghen/blink.cmp',
   dependencies = 'rafamadriz/friendly-snippets',
   version = '*',
+  event = 'InsertEnter',
   opts = {
     keymap = {
       preset = 'enter',
@@ -16,21 +17,23 @@ return {
     },
     completion = {
       menu = {
-        border = 'single',
+        -- border = 'rounded',
       },
       documentation = {
         auto_show = true,
-        auto_show_delay_ms = 1000,
+        auto_show_delay_ms = 750,
         window = {
-          border = 'single',
+          -- border = 'rounded',
         },
       },
     },
     signature = {
-      enabled = true,
-      window = {
-        border = 'single',
-      },
+      enabled = false,
+      -- window = {
+      --   show_documentation = false,
+      --   max_height = 1,
+      --   -- border = 'rounded',
+      -- },
     },
   },
 }
