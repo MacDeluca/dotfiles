@@ -33,6 +33,7 @@ return {
     })
 
     local capabilities = require('blink.cmp').get_lsp_capabilities()
+    local lspconfig = require('lspconfig')
 
     ---@diagnostic disable-next-line: missing-fields
     require('mason-lspconfig').setup({
@@ -40,14 +41,17 @@ return {
       handlers = {
         -- this first function is the "default handler"
         -- it applies to every language server without a "custom handler"
-        function(server_name) require('lspconfig')[server_name].setup({ capabilities = capabilities }) end,
+        function(server_name) lspconfig[server_name].setup({ capabilities = capabilities }) end,
+
         ---                 ---
         --- CUSTOM HANDLERS ---
         ---                 ---
-        eslint = function() require('lspconfig').eslint.setup({ capabilities = capabilities }) end,
 
+        -- ESLINT
+        eslint = function() lspconfig.eslint.setup({ capabilities = capabilities }) end,
+
+        -- TYPESCRIPT
         ts_ls = function()
-          local lspconfig = require('lspconfig')
           lspconfig.ts_ls.setup({
             cmd = { 'typescript-language-server', '--stdio' },
 
@@ -59,9 +63,23 @@ return {
           })
         end,
 
-        -- Lua language server custom handler
+        -- HELM
+        helm_ls = function()
+          lspconfig.helm_ls.setup({
+            capabilities = capabilities,
+            -- settings = {
+            --   ['helm-ls'] = {
+            --     yamlls = {
+            --       path = 'yaml-language-server',
+            --     },
+            --   },
+            -- },
+          })
+        end,
+
+        -- LUA
         lua_ls = function()
-          require('lspconfig').lua_ls.setup({
+          lspconfig.lua_ls.setup({
             capabilities = capabilities,
             settings = {
               Lua = {
