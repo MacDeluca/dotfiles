@@ -20,7 +20,11 @@ local plugins = {
     event = 'InsertEnter',
     config = true,
   },
-  { 'windwp/nvim-ts-autotag', event = { 'LspAttach' }, opts = {} },
+  {
+    'windwp/nvim-ts-autotag',
+    event = { 'LspAttach' },
+    opts = {},
+  },
   {
     'nvim-focus/focus.nvim',
     event = { 'VeryLazy' },

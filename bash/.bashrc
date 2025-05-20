@@ -115,3 +115,7 @@ export PATH=$HOME/.dotnet/tools:$PATH
 
 export PATH=$PATH:/usr/local/go/bin
 [[ -e ~/bin ]] && export PATH=$PATH:~/bin
+
+export ANDROID_HOME=/usr/lib/android-sdk
+export PATH="${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools"
+

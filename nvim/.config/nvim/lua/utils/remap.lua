@@ -23,12 +23,12 @@ vim.keymap.set(
 )
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.get_next, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.get_prev, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', function()
-  vim.diagnostic.reset()
-  vim.Cmd('LspRestart')
-end, { desc = '[D]iagnostic [R]eset' })
+-- stylua: ignore start
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ forward = true, count = 1, wrap = true }) end, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ forward = false, count = 1, wrap = true }) end, { desc = 'Go to next [D]iagnostic message' })
+
+vim.keymap.set('n', '<leader>e', function() vim.diagnostic.reset() vim.Cmd('LspRestart') end, { desc = '[D]iagnostic [R]eset' })
+-- stylua: ignore end
 
 --traverse found searches up / down
 vim.keymap.set('n', 'N', 'Nzzzv')

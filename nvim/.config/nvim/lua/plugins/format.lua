@@ -1,3 +1,15 @@
+local function getNodeFormatter()
+  local prettierConfig = vim.fn.getcwd() .. '/.prettierrc'
+
+  -- If prettier config file exists, use prettierrc
+  if vim.fn.filereadable(prettierConfig) == 1 then
+    return { 'prettierd' }
+  end
+
+  -- If no config file, use eslint_d
+  return { 'prettierd', 'eslint_d' }
+end
+
 return {
   'stevearc/conform.nvim',
   event = 'InsertEnter',
@@ -5,10 +17,10 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'black' },
-      javascript = { 'prettierd' },
-      typescript = { 'prettierd' },
-      javascriptreact = { 'prettierd' },
-      typescriptreact = { 'prettierd' },
+      javascript = getNodeFormatter(),
+      typescript = getNodeFormatter(),
+      javascriptreact = getNodeFormatter(),
+      typescriptreact = getNodeFormatter(),
       bash = { 'shellcheck' },
       cs = { 'csharpier' },
     },

@@ -11,26 +11,24 @@ directory_mappings=$(cat "$config_path")
 
 # add new directory to config file
 function add_directory() {
-  echo -n "adding directory "$current_directory" alias: "
-  read -r dir
-  echo "$dir $current_directory" >> "$config_path"
-  echo "added directory"
+  read -p "Adding '$directory' using alias: " directory
+  [[ -n "$directory" ]] && echo "$directory" >> "$config_path" &&
+  echo "added alias" ||
+  echo "alias cannot be empty"
   return 0
 }
 
-# remove directory from config file
-function remove_directory() {
-  remove_index=$(cat -n "$config_path" | fzf --with-nth=2 | awk '{print $1}')
-  [ -n "$remove_index" ] && sed -i "${remove_index}d" "$config_path" &&
-    echo "removed directory"
+# edit the config file
+function edit_config() {
+  vim "$config_path"
   return 0
 }
 
 # check if -a or --add argument was passed
 [ "$1" == "-a" ] || [ "$1" == "--add" ] && add_directory && return 0
 
-# check if -r or --remove argument was passed
-[ "$1" == "-r" ] || [ "$1" == "--remove" ] && remove_directory && return 0
+# check if -e or --edit argument was passed
+[ "$1" == "-e" ] || [ "$1" == "--edit" ] && edit_config && return 0
 
 # display the alias but select the directory
 fzf_selection=$(echo "${directory_mappings[@]}" | fzf --with-nth=1 --height 40% --border | cut -d ' ' -f2)

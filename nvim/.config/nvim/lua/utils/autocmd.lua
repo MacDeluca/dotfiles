@@ -33,3 +33,10 @@ autocmd({ 'FileType' }, {
   pattern = 'sql',
   callback = function(event) vim.bo[event.buf].commentstring = '-- %s' end,
 })
+
+-- Split help buffers to the right
+autocmd('FileType', {
+  desc = 'Automatically Split help Buffers to the right',
+  pattern = 'help',
+  command = 'wincmd L',
+})
