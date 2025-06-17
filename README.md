@@ -45,3 +45,8 @@ Packages without configuration are excluded from this repository. Examples inclu
 ## What's a `Symlink`?
 A symlink (symbolic link) is a file that points to another file or directory. It allows files to be stored in multiple directories simultaneously, providing a convenient way to manage configurations across different locations.
 
+
+## Additional commands
+- Swap caps with esc (for vim) - Run in powershell
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Keyboard Layout" -Name "Scancode Map" -PropertyType Binary -Value ([byte[]](0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x01,0x00,0x3A,0x00,0x3A,0x00,0x01,0x00,0x00,0x00,0x00,0x00))
+

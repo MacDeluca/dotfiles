@@ -38,6 +38,12 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+export TERM=tmux-256color
+
+if [ -z "$TMUX" ]; then
+  export TERM="xterm-256color"
+fi
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -101,15 +107,12 @@ export PATH="$PATH:/opt/nvim/"
 export PATH=$PATH:~/scripts:~/tools/openshift-developer-tools/bin:/opt/homebrew/bin:~/.local/bin
 export PATH=/opt/homebrew/bin:$PATH
 
-export LC_ALL=en_IN.UTF-8
-export LANG=en_IN.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-. "$HOME/.cargo/env"
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# . "$HOME/.cargo/env"
 
 export PATH=$HOME/.dotnet/tools:$PATH
 
@@ -119,3 +122,6 @@ export PATH=$PATH:/usr/local/go/bin
 export ANDROID_HOME=/usr/lib/android-sdk
 export PATH="${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools"
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

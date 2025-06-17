@@ -2,4 +2,5 @@
 
 .git
 install.sh
+stow.sh
 README.md
