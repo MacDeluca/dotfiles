@@ -23,8 +23,6 @@ alias ....='cd ../../..'
 
 alias ld='lazydocker'
 
-alias dc='docker compose'
-
 # scripts
 alias gd='. gd'
 alias gdls='cat ~/dotfiles/scripts/scripts/gd-config.txt'
@@ -35,11 +33,7 @@ alias alacrittyconfig="vim /mnt/c/Users/MacD/AppData/Roaming/alacritty"
 alias tmuxconfig="vim ~/dotfiles/tmux/.config/tmux/tmux.conf"
 alias bashconfig="vim ~/dotfiles/bash/.bashrc && source ~/.bashrc"
 alias aliasconfig="vim ~/dotfiles/bash/.bash_aliases && source ~/.bashrc"
-alias weztermconfig="vim /mnt/c/Users/MacD/.wezterm.lua"
-
-# source files
-alias sourcetmux="tmux source ~/dotfiles/tmux/.config/tmux/tmux.conf && echo 'tmux sourced!'"
-alias sourcebash="source ~/.bashrc && echo 'bash sourced'"
+alias weztermconfi="vim /mnt/c/Users/MacD/.wezterm.l"
 
 # neovim
 alias vim='nvim'

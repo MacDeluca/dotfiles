@@ -55,7 +55,7 @@ return {
           lspconfig.ts_ls.setup({
             cmd = { 'typescript-language-server', '--stdio' },
 
-            root_dir = lspconfig.util.root_pattern('tsconfig.json'),
+            root_dir = lspconfig.util.root_pattern('tsconfig.json', 'package.json'),
             settings = {
               -- Disable the JSDoc type hint
               diagnostics = { ignoredCodes = { 80004 } },
@@ -67,13 +67,6 @@ return {
         helm_ls = function()
           lspconfig.helm_ls.setup({
             capabilities = capabilities,
-            -- settings = {
-            --   ['helm-ls'] = {
-            --     yamlls = {
-            --       path = 'yaml-language-server',
-            --     },
-            --   },
-            -- },
           })
         end,
 
