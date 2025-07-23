@@ -35,9 +35,8 @@ return {
     local capabilities = require('blink.cmp').get_lsp_capabilities()
     local lspconfig = require('lspconfig')
 
-    ---@diagnostic disable-next-line: missing-fields
     require('mason-lspconfig').setup({
-      ensure_installed = { 'lua_ls' },
+      ensure_installed = { 'lua_ls', 'ts_ls', 'eslint' },
       handlers = {
         -- this first function is the "default handler"
         -- it applies to every language server without a "custom handler"
@@ -52,13 +51,16 @@ return {
 
         -- TYPESCRIPT
         ts_ls = function()
+          print('Running TypeScript Language Server')
           lspconfig.ts_ls.setup({
-            cmd = { 'typescript-language-server', '--stdio' },
-
+            cmd = { 'typescript-language-server', '--stdio', '--' },
+            capabilities = capabilities,
             root_dir = lspconfig.util.root_pattern('tsconfig.json', 'package.json'),
             settings = {
-              -- Disable the JSDoc type hint
-              diagnostics = { ignoredCodes = { 80004 } },
+              diagnostics = {
+                -- Disable the JSDoc type hint
+                ignoredCodes = { 80004 }
+              },
             },
           })
         end,

@@ -101,6 +101,10 @@ fi
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
+export REACT_NATIVE_PACKAGER_HOSTNAME=$(hostname -I | awk '{print $1}')
+
+export BROWSER="explorer.exe"
+
 #https://github.com/neovim/neovim/blob/master/INSTALL.md
 export PATH="$PATH:/opt/nvim/"
 
@@ -121,6 +125,7 @@ export PATH=$PATH:/usr/local/go/bin
 
 export ANDROID_HOME=/usr/lib/android-sdk
 export PATH="${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools"
+export PATH="/usr/lib/jvm/java-17-openjdk-amd64/bin/java:$PATH"
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

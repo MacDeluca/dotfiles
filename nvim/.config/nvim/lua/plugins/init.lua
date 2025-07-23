@@ -33,7 +33,7 @@ local plugins = {
       enable = true,
       autoresize = {
         minheight = 10,
-        minwidth = 30,
+        minwidth = 40,
       },
       ui = {
         signcolumn = false,

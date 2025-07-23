@@ -18,6 +18,9 @@ return {
           -- statusline highlights
           StatusLine = { bg = colours.surface0 },
           StatusBranch = { fg = colours.green },
+          StatusLineNormal = { fg = colours.blue },
+          StatusLineInsert = { fg = colours.green },
+          StatusLineVisual = { fg = colours.mauve },
           -- -- StatusFile = { fg = colours.mauve },
           StatusError = { fg = colours.red },
         }

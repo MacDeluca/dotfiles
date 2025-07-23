@@ -4,6 +4,8 @@ local wezterm = require 'wezterm'
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+config.default_cursor_style = 'SteadyBar'
+
 -- This is where you actually apply your config choices.
 config.default_domain = 'WSL:Ubuntu'
 

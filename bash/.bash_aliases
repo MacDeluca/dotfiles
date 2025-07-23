@@ -39,6 +39,8 @@ alias weztermconfi="vim /mnt/c/Users/MacD/.wezterm.l"
 alias vim='nvim'
 alias v='vim .'
 
+alias start='explorer.exe'
+
 # tmux
 alias tmux='tmux -u'
 alias ta='tmux new-session -A -s'
