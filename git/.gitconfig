@@ -7,6 +7,7 @@
 [user]
 	email = Mac.Deluca@quartech.com
 	name = Mac Deluca
+	; signingkey = 044CC4EBEB18D169
 [init]
 	defaultBranch = main
 [push]
@@ -17,3 +18,5 @@
 	rebase = false
 [rerere]
 	enabled = true
+; [commit]
+; 	gpgsign = true

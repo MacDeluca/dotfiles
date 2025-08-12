@@ -5,9 +5,6 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     { 'saghen/blink.cmp' },
-    -- { 'hrsh7th/cmp-nvim-lsp' },
-    { 'williamboman/mason.nvim' },
-    { 'williamboman/mason-lspconfig.nvim' },
   },
   init = function()
     -- Reserve a space in the gutter
@@ -33,95 +30,82 @@ return {
     })
 
     local capabilities = require('blink.cmp').get_lsp_capabilities()
-    local lspconfig = require('lspconfig')
 
-    require('mason-lspconfig').setup({
-      ensure_installed = { 'lua_ls', 'ts_ls', 'eslint' },
-      handlers = {
-        -- this first function is the "default handler"
-        -- it applies to every language server without a "custom handler"
-        function(server_name) lspconfig[server_name].setup({ capabilities = capabilities }) end,
-
-        ---                 ---
-        --- CUSTOM HANDLERS ---
-        ---                 ---
-
-        -- ESLINT
-        eslint = function() lspconfig.eslint.setup({ capabilities = capabilities }) end,
-
-        -- TYPESCRIPT
-        ts_ls = function()
-          print('Running TypeScript Language Server')
-          lspconfig.ts_ls.setup({
-            cmd = { 'typescript-language-server', '--stdio', '--' },
-            capabilities = capabilities,
-            root_dir = lspconfig.util.root_pattern('tsconfig.json', 'package.json'),
-            settings = {
-              diagnostics = {
-                -- Disable the JSDoc type hint
-                ignoredCodes = { 80004 }
-              },
-            },
-          })
-        end,
-
-        -- HELM
-        helm_ls = function()
-          lspconfig.helm_ls.setup({
-            capabilities = capabilities,
-          })
-        end,
-
-        -- LUA
-        lua_ls = function()
-          lspconfig.lua_ls.setup({
-            capabilities = capabilities,
-            settings = {
-              Lua = {
-                telemetry = {
-                  enable = false,
-                },
-              },
-            },
-            on_init = function(client)
-              local join = vim.fs.joinpath
-              local path = client.workspace_folders[1].name
-
-              -- Don't do anything if there is project local config
-              if vim.uv.fs_stat(join(path, '.luarc.json')) or vim.uv.fs_stat(join(path, '.luarc.jsonc')) then
-                return
-              end
-
-              -- Apply neovim specific settings
-              local runtime_path = vim.split(package.path, ';')
-              table.insert(runtime_path, join('lua', '?.lua'))
-              table.insert(runtime_path, join('lua', '?', 'init.lua'))
-
-              local nvim_settings = {
-                runtime = {
-                  -- Tell the language server which version of Lua you're using
-                  version = 'LuaJIT',
-                  path = runtime_path,
-                },
-                diagnostics = {
-                  -- Get the language server to recognize the `vim` global
-                  globals = { 'vim' },
-                },
-                workspace = {
-                  checkThirdParty = false,
-                  library = {
-                    -- Make the server aware of Neovim runtime files
-                    vim.env.VIMRUNTIME,
-                    vim.fn.stdpath('config'),
-                  },
-                },
-              }
-
-              client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, nvim_settings)
-            end,
-          })
-        end,
+    -- Typescript Language Server
+    vim.lsp.config('ts_ls', {
+      cmd = { 'typescript-language-server', '--stdio' },
+      capabilities = capabilities,
+      file_types = { 'ts', 'tsx' },
+      -- root_markers = lspconfig.util.root_pattern('tsconfig.json', 'package.json'),
+      settings = {
+        diagnostics = {
+          -- Disable the JSDoc type hint
+          ignoredCodes = { 80004 }
+        },
       },
     })
+    vim.lsp.enable('ts_ls')
+
+    -- ESLint Language Server
+    vim.lsp.config('eslint', {
+      capabilities = capabilities,
+    })
+    vim.lsp.enable('eslint')
+
+    -- Helm Language Server
+    vim.lsp.config('helm_ls', {
+      capabilities = capabilities,
+    })
+    vim.lsp.enable('helm_ls')
+
+    -- Lua Language Server
+    vim.lsp.config('lua_ls', {
+      capabilities = capabilities,
+      file_types = { 'lua' },
+      settings = {
+        Lua = {
+          telemetry = {
+            enable = false,
+          },
+        },
+      },
+      on_init = function(client)
+        local join = vim.fs.joinpath
+        local path = client.workspace_folders[1].name
+
+        -- Don't do anything if there is project local config
+        if vim.uv.fs_stat(join(path, '.luarc.json')) or vim.uv.fs_stat(join(path, '.luarc.jsonc')) then
+          return
+        end
+
+        -- Apply neovim specific settings
+        local runtime_path = vim.split(package.path, ';')
+        table.insert(runtime_path, join('lua', '?.lua'))
+        table.insert(runtime_path, join('lua', '?', 'init.lua'))
+
+        local nvim_settings = {
+          runtime = {
+            -- Tell the language server which version of Lua you're using
+            version = 'LuaJIT',
+            path = runtime_path,
+          },
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = { 'vim' },
+          },
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              -- Make the server aware of Neovim runtime files
+              vim.env.VIMRUNTIME,
+              vim.fn.stdpath('config'),
+            },
+          },
+        }
+
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, nvim_settings)
+      end,
+    })
+    vim.lsp.enable('lua_ls')
   end,
 }

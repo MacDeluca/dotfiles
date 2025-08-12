@@ -100,6 +100,7 @@ fi
 
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+export HUSKY=0
 
 export REACT_NATIVE_PACKAGER_HOSTNAME=$(hostname -I | awk '{print $1}')
 
