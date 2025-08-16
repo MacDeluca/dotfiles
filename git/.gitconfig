@@ -1,13 +1,6 @@
-[credential "https://github.com"]
-	helper =
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper =
-	helper = !/usr/bin/gh auth git-credential
 [user]
 	email = Mac.Deluca@quartech.com
 	name = Mac Deluca
-	; signingkey = 044CC4EBEB18D169
 [init]
 	defaultBranch = main
 [push]
@@ -18,5 +11,5 @@
 	rebase = false
 [rerere]
 	enabled = true
-; [commit]
-; 	gpgsign = true
+[credential]
+	helper = !/opt/homebrew/bin/gh auth git-credential

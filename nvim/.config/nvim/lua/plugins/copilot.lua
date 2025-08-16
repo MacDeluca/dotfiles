@@ -1,3 +1,5 @@
+-- To start auth workflow run:
+-- :Copilot auth
 return {
   'zbirenbaum/copilot.lua',
   cmd = 'Copilot',

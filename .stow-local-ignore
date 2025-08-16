@@ -3,4 +3,6 @@
 .git
 install.sh
 stow.sh
+/bash/**
 README.md
+install-gotchas.txt

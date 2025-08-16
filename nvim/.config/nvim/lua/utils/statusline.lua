@@ -79,6 +79,10 @@ local function inject_hl_mode(text)
     return inject_hl('StatusLineVisual', text)
   end
 
+  if text == 'COMMAND' then
+    return inject_hl('StatusLineCommand', text)
+  end
+
   return text
 end
 

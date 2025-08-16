@@ -1,0 +1,1 @@
+- When installing neovim use the brew install version. ie: brew install neovim

@@ -1,12 +1,16 @@
 return {
   'catppuccin/nvim',
   name = 'catppuccin',
+  commit = '931a129463ca09c8805d564a28b3d0090e536e1d',
   priority = 1000,
   lazy = false,
   config = function()
     require('catppuccin').setup({
       flavour = 'mocha',
-      transparent_background = true,
+      -- transparent_background = false,
+      float = {
+        transparent = true
+      },
       custom_highlights = function(colours)
         return {
           -- blink higlights
@@ -21,6 +25,7 @@ return {
           StatusLineNormal = { fg = colours.blue },
           StatusLineInsert = { fg = colours.green },
           StatusLineVisual = { fg = colours.mauve },
+          StatusLineCommand = { fg = colours.yellow },
           -- -- StatusFile = { fg = colours.mauve },
           StatusError = { fg = colours.red },
         }

@@ -19,11 +19,16 @@ local plugins = {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = true,
+    opts = {
+      enable_check_bracket_line = true,
+      ignored_next_char = "[%w%.]"
+    }
   },
   {
     'windwp/nvim-ts-autotag',
     event = { 'LspAttach' },
-    opts = {},
+    opts = {
+    },
   },
   {
     'nvim-focus/focus.nvim',
