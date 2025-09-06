@@ -1,0 +1,3 @@
+dotfiles ~/dotfiles
+neovim ~/dotfiles/nvim/.config/nvim
+bc-wallet ~/projects/bc-wallet-mobile

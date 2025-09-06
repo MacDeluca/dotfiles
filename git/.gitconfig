@@ -13,3 +13,7 @@
 	enabled = true
 [credential]
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[format]
+	signoff = true
+[commit]
+	signoff = true

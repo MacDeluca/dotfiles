@@ -23,6 +23,7 @@ return {
       typescriptreact = getNodeFormatter(),
       bash = { 'shellcheck' },
       cs = { 'csharpier' },
+      kt = {},
     },
     default_format_opts = {
       lsp_format = 'format',

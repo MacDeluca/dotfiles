@@ -1,6 +1,0 @@
-scripts ~/dotfiles/scripts/scripts
-dotfiles ~/dotfiles
-neovim ~/dotfiles/nvim/.config/nvim
-trust ~/projects/trust
-document ~/projects/trust/trust-services-platform/document-service
-bc-wallet ~/projects/bc-wallet

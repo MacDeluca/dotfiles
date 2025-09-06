@@ -31,6 +31,15 @@ return {
 
     local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+    -- Swift Language Server
+    vim.lsp.config('sourcekit', {
+      cmd = { 'sourcekit-lsp' },
+      file_types = { 'swift' },
+      capabilities = capabilities,
+    })
+
+    vim.lsp.enable('sourcekit')
+
     -- Typescript Language Server
     vim.lsp.config('ts_ls', {
       cmd = { 'typescript-language-server', '--stdio' },
@@ -40,72 +49,42 @@ return {
       settings = {
         diagnostics = {
           -- Disable the JSDoc type hint
-          ignoredCodes = { 80004 }
+          ignoredCodes = { 80004 },
         },
       },
     })
+
     vim.lsp.enable('ts_ls')
 
     -- ESLint Language Server
     vim.lsp.config('eslint', {
       capabilities = capabilities,
     })
+
     vim.lsp.enable('eslint')
 
     -- Helm Language Server
     vim.lsp.config('helm_ls', {
       capabilities = capabilities,
     })
+
     vim.lsp.enable('helm_ls')
 
+    -- Kotlin Language Server
+    vim.lsp.config('kotlin_ls', {
+      file_types = { 'kt' },
+      capabilities = capabilities,
+    })
+
+    vim.lsp.enable('kotlin_ls')
+
     -- Lua Language Server
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
     vim.lsp.config('lua_ls', {
       capabilities = capabilities,
-      file_types = { 'lua' },
-      settings = {
-        Lua = {
-          telemetry = {
-            enable = false,
-          },
-        },
-      },
-      on_init = function(client)
-        local join = vim.fs.joinpath
-        local path = client.workspace_folders[1].name
-
-        -- Don't do anything if there is project local config
-        if vim.uv.fs_stat(join(path, '.luarc.json')) or vim.uv.fs_stat(join(path, '.luarc.jsonc')) then
-          return
-        end
-
-        -- Apply neovim specific settings
-        local runtime_path = vim.split(package.path, ';')
-        table.insert(runtime_path, join('lua', '?.lua'))
-        table.insert(runtime_path, join('lua', '?', 'init.lua'))
-
-        local nvim_settings = {
-          runtime = {
-            -- Tell the language server which version of Lua you're using
-            version = 'LuaJIT',
-            path = runtime_path,
-          },
-          diagnostics = {
-            -- Get the language server to recognize the `vim` global
-            globals = { 'vim' },
-          },
-          workspace = {
-            checkThirdParty = false,
-            library = {
-              -- Make the server aware of Neovim runtime files
-              vim.env.VIMRUNTIME,
-              vim.fn.stdpath('config'),
-            },
-          },
-        }
-
-        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, nvim_settings)
-      end,
+      cmd = { 'lua-language-server' },
     })
+
     vim.lsp.enable('lua_ls')
   end,
 }

@@ -1,34 +1,44 @@
 local plugins = {
   {
-    'tpope/vim-dadbod',
-  },
-  {
-    'kristijanhusak/vim-dadbod-ui',
-    dependencies = {
-      { 'tpope/vim-dadbod',                     lazy = true },
-      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true }, -- Optional
-    },
-    cmd = {
-      'DBUI',
-      'DBUIToggle',
-      'DBUIAddConnection',
-      'DBUIFindBuffer',
+    'folke/lazydev.nvim',
+    ft = 'lua', -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
     },
   },
+  -- {
+  --   'tpope/vim-dadbod',
+  -- },
+  -- {
+  --   'kristijanhusak/vim-dadbod-ui',
+  --   dependencies = {
+  --     { 'tpope/vim-dadbod',                     lazy = true },
+  --     { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true }, -- Optional
+  --   },
+  --   cmd = {
+  --     'DBUI',
+  --     'DBUIToggle',
+  --     'DBUIAddConnection',
+  --     'DBUIFindBuffer',
+  --   },
+  -- },
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = true,
     opts = {
       enable_check_bracket_line = true,
-      ignored_next_char = "[%w%.]"
-    }
+      ignored_next_char = '[%w%.]',
+    },
   },
   {
     'windwp/nvim-ts-autotag',
     event = { 'LspAttach' },
-    opts = {
-    },
+    opts = {},
   },
   {
     'nvim-focus/focus.nvim',
