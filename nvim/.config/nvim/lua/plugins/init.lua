@@ -1,15 +1,4 @@
 local plugins = {
-  {
-    'folke/lazydev.nvim',
-    ft = 'lua', -- only load on lua files
-    opts = {
-      library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-      },
-    },
-  },
   -- {
   --   'tpope/vim-dadbod',
   -- },
@@ -32,7 +21,7 @@ local plugins = {
     config = true,
     opts = {
       enable_check_bracket_line = true,
-      ignored_next_char = '[%w%.]',
+      ignored_next_char = '[%w%.%{%(%[]',
     },
   },
   {
@@ -57,6 +46,7 @@ local plugins = {
     },
   },
   {
+    -- :TodoQuickFix
     -- TABLE OF CONTENTS:
     -- PERF:
     -- HACK:

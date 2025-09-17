@@ -1,4 +1,3 @@
--- TODO: Add completion for vim-dadbod / check if working already
 return {
   'saghen/blink.cmp',
   dependencies = 'rafamadriz/friendly-snippets',
