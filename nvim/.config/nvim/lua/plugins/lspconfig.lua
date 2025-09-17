@@ -90,19 +90,34 @@ return {
         },
       })
 
-      -- -- ESLint Language Server (for JavaScript and TypeScript)
-      setup_lsp('eslint-lsp', {
-        cmd = { get_mason_bin('vscode-eslint-language-server'), '--stdio' },
-        filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+      -- ESLint Language Server (for JavaScript and TypeScript)
+      -- Manually installed via: `npm i -g vscode-langservers-extracted`
+      local base_on_attach = vim.lsp.config.eslint.on_attach
+      setup_lsp('eslint', {
         capabilities = capabilities,
-        root_dir = vim.fs.root(0, {
-          'eslint.config.mjs',
-        }),
         settings = {
-          experimental = { useFlatConfig = true },
-          workingDirectory = { mode = 'auto' },
-          nodePath = vim.fn.getcwd() .. '/node_modules', -- 👈 force local eslint
+          nodePath = vim.fn.getcwd() .. '/node_modules',
         },
+        -- root_dir = vim.fs.root(0, {
+        --   '.eslintrc',
+        --   '.eslintrc.mjs',
+        --   '.eslintrc.cjs',
+        --   '.eslintrc.json',
+        --   'eslint.config.mjs',
+        --   'eslint.config.cjs',
+        --   'eslint.config.js',
+        -- }),
+        on_attach = function(client, bufnr)
+          if not base_on_attach then
+            return
+          end
+
+          base_on_attach(client, bufnr)
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = bufnr,
+            command = 'LspEslintFixAll',
+          })
+        end,
       })
 
       -- Helm Language Server
@@ -113,8 +128,8 @@ return {
 
       -- Kotlin Language Server
       setup_lsp('kotlin_ls', {
-        -- TODO: add cmd
-        filetypes = { 'kt' },
+        cmd = { 'kotlin-language-server' },
+        filetypes = { 'kotlin' },
         capabilities = capabilities,
       })
     end,
