@@ -40,3 +40,9 @@ autocmd('FileType', {
   pattern = 'help',
   command = 'wincmd L',
 })
+
+-- vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
+--   callback = function()
+--     vim.lsp.
+--     vim.lsp.util.close_floating_preview() end,
+-- })

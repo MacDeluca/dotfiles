@@ -12,7 +12,6 @@ return {
     },
   },
   {
-
     'neovim/nvim-lspconfig',
     cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
     event = { 'BufReadPre', 'BufNewFile' },
@@ -32,19 +31,17 @@ return {
           local opts = { buffer = event.buf }
 
           -- Hover
-          vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+          vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ focusable = false }) end, opts)
           -- Code actions
           vim.keymap.set('n', '<leader>k', vim.lsp.buf.code_action, opts)
           -- View diagnostics
-          vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
+          vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float({ focusable = false }) end, opts)
           -- Rename
           vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
         end,
       })
 
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-      local util = require('lspconfig.util')
 
       -- Helper function to setup and enable a language server
       local setup_lsp = function(name, config)
@@ -92,7 +89,7 @@ return {
 
       -- ESLint Language Server (for JavaScript and TypeScript)
       -- Manually installed via: `npm i -g vscode-langservers-extracted`
-      local base_on_attach = vim.lsp.config.eslint.on_attach
+      -- local base_on_attach = vim.lsp.config.eslint.on_attach
       setup_lsp('eslint', {
         capabilities = capabilities,
         settings = {
@@ -107,17 +104,17 @@ return {
         --   'eslint.config.cjs',
         --   'eslint.config.js',
         -- }),
-        on_attach = function(client, bufnr)
-          if not base_on_attach then
-            return
-          end
-
-          base_on_attach(client, bufnr)
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = bufnr,
-            command = 'LspEslintFixAll',
-          })
-        end,
+        -- on_attach = function(client, bufnr)
+        --   if not base_on_attach then
+        --     return
+        --   end
+        --
+        --   base_on_attach(client, bufnr)
+        --   vim.api.nvim_create_autocmd('BufWritePre', {
+        --     buffer = bufnr,
+        --     command = 'LspEslintFixAll',
+        --   })
+        -- end,
       })
 
       -- Helm Language Server

@@ -41,3 +41,20 @@ vim.keymap.set('n', 'n', 'nzzzv')
 
 vim.keymap.set('n', 'Q', '<nop>')
 vim.keymap.set('n', '<Space>', '<Nop>', { silent = true })
+
+-- Close all floating windows (including LSP popups)
+local function close_all_floats()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local cfg = vim.api.nvim_win_get_config(win)
+    if cfg.relative ~= '' then -- it's a floating window
+      pcall(vim.api.nvim_win_close, win, false)
+    end
+  end
+end
+
+-- Example keymap
+vim.keymap.set('n', '<Esc>', function()
+  close_all_floats()
+  vim.cmd('nohlsearch')
+end, { desc = 'Close all floats' })
+-- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')

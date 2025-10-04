@@ -29,50 +29,64 @@ return {
   keys = function()
     Snacks = require('snacks')
 
-    vim.keymap.set('n', 'gv', ":vsplit | lua Snacks.picker.lsp_definitions()<CR>", { noremap = true, silent = true })
-
-    local function close_all_floats()
-      for _, win in ipairs(vim.api.nvim_list_wins()) do
-        local cfg = vim.api.nvim_win_get_config(win)
-        if cfg.relative ~= '' then
-          pcall(vim.api.nvim_win_close, win, true)
-        end
-      end
-    end
+    vim.keymap.set('n', 'gv', ':vsplit | lua Snacks.picker.lsp_definitions()<CR>', { noremap = true, silent = true })
 
     return {
       -- Find files
-      { '<leader><space>', function() Snacks.picker.smart() end,                                   desc = 'Smart Find Files' },
-      { '<leader>pf',      function() Snacks.picker.files({ hidden = true }) end,                  desc = 'Find Files' },
-      { '<leader>ph',      function() Snacks.picker.recent() end,                                  desc = 'Recent' },
-      { '<leader>n',       function() Snacks.picker.files({ dirs = { "~/notes" } }) end,           desc = 'Notes' },
-      { '<leader>ns',      function() Snacks.picker.grep({ dirs = { "~/notes" } }) end,            desc = 'Notes' },
+      {
+        '<leader><space>',
+        function() Snacks.picker.smart() end,
+        desc = 'Smart Find Files',
+      },
+      {
+        '<leader>pf',
+        function() Snacks.picker.files({ hidden = true }) end,
+        desc = 'Find Files',
+      },
+      { '<leader>ph', function() Snacks.picker.recent() end, desc = 'Recent' },
+      { '<leader>n', function() Snacks.picker.files({ dirs = { '~/notes' } }) end, desc = 'Notes' },
+      { '<leader>ns', function() Snacks.picker.grep({ dirs = { '~/notes' } }) end, desc = 'Notes' },
 
       -- Search in files and buffers
-      { '<leader>ps',      function() Snacks.picker.grep({ hidden = true }) end,                   desc = 'Grep' },
-      { '<leader>pb',      function() Snacks.picker.buffers() end,                                 desc = 'Buffers' },
-      { '<leader>pw',      function() Snacks.picker.grep_word() end,                               desc = 'Visual selection or word', mode = { 'n', 'x' } },
+      { '<leader>ps', function() Snacks.picker.grep({ hidden = true }) end, desc = 'Grep' },
+      { '<leader>/', function() Snacks.picker.grep_buffers() end, desc = 'Grep Open Buffers' },
+      { '<leader>pb', function() Snacks.picker.buffers() end, desc = 'Buffers' },
+      {
+        '<leader>pw',
+        function() Snacks.picker.grep_word() end,
+        desc = 'Visual selection or word',
+        mode = { 'n', 'x' },
+      },
 
       -- Git actions
-      { '<leader>gb',      function() Snacks.picker.git_branches() end,                            desc = '[G]it [B]ranches' },
-      { "<leader>gu",      function() Snacks.picker.git_status() end,                              desc = "[G]it [S]tatus" },
+      {
+        '<leader>gb',
+        function() Snacks.picker.git_branches() end,
+        desc = '[G]it [B]ranches',
+      },
+      {
+        '<leader>pg',
+        function() Snacks.picker.git_status() end,
+        desc = '[G]it [S]tatus',
+      },
 
       -- LSP
-      { 'gd',              function()
-        close_all_floats()
-        Snacks.picker.lsp_definitions()
-      end,                                                                                         desc = '[G]oto [D]efinition' },
-      { 'gr',              function()
-        close_all_floats()
-        Snacks.picker.lsp_references()
-      end,                                                                                         nowait = true,                     desc = '[G]oto [R]eferences' },
-      { 'gt',              function()
-        close_all_floats()
-        Snacks.picker.lsp_type_definitions()
-      end,                                                                                         desc = '[G]oto [T]ype Definition' },
-
-      -- I can't spell
-      { '<leader>sp',      function() Snacks.picker.spelling() end,                                desc = '[S]pelling' },
+      {
+        'gd',
+        function() Snacks.picker.lsp_definitions() end,
+        desc = '[G]oto [D]efinition',
+      },
+      {
+        'gr',
+        function() Snacks.picker.lsp_references() end,
+        nowait = true,
+        desc = '[G]oto [R]eferences',
+      },
+      {
+        'gt',
+        function() Snacks.picker.lsp_type_definitions() end,
+        desc = '[G]oto [T]ype Definition',
+      },
     }
   end,
 }

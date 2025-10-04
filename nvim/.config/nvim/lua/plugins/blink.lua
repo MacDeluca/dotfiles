@@ -19,7 +19,7 @@ return {
       preset = 'enter',
     },
     appearance = {
-      use_nvim_cmp_as_default = true,
+      -- use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono',
     },
     cmdline = {
@@ -27,23 +27,21 @@ return {
     },
     completion = {
       menu = {
-        -- border = 'rounded',
+        border = 'none',
       },
       documentation = {
         auto_show = true,
-        auto_show_delay_ms = 750,
+        auto_show_delay_ms = 400,
         window = {
-          -- border = 'rounded',
+          border = 'single',
         },
       },
     },
     signature = {
       enabled = false,
-      -- window = {
-      --   show_documentation = false,
-      --   max_height = 1,
-      --   -- border = 'rounded',
-      -- },
+      window = {
+        border = 'single',
+      },
     },
   },
 }
