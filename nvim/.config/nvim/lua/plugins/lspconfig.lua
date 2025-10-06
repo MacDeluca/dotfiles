@@ -91,10 +91,10 @@ return {
       -- Manually installed via: `npm i -g vscode-langservers-extracted`
       -- local base_on_attach = vim.lsp.config.eslint.on_attach
       setup_lsp('eslint', {
-        capabilities = capabilities,
         settings = {
           nodePath = vim.fn.getcwd() .. '/node_modules',
         },
+        capabilities = capabilities,
         -- root_dir = vim.fs.root(0, {
         --   '.eslintrc',
         --   '.eslintrc.mjs',

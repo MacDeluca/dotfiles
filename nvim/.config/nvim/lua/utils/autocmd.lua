@@ -41,6 +41,11 @@ autocmd('FileType', {
   command = 'wincmd L',
 })
 
+vim.api.nvim_create_user_command('L', function(opts)
+  local command = table.concat(opts.fargs, ' ')
+  vim.fn.system(string.format("tmux send-keys -t 3 '%s' Enter", command))
+end, { nargs = '*' })
+
 -- vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
 --   callback = function()
 --     vim.lsp.

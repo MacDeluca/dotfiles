@@ -31,8 +31,9 @@ local plugins = {
   },
   {
     'nvim-focus/focus.nvim',
-    event = { 'VeryLazy' },
+    -- event = { 'VeryLazy' },
     version = '*',
+    -- cmd = { 'Split', 'Vsplit' },
     opts = {
       enable = true,
       autoresize = {
