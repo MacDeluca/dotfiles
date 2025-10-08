@@ -22,9 +22,7 @@ local nvim_modes = {
 }
 
 -- Get the current mode
-local function mode()
-  return nvim_modes[vim.api.nvim_get_mode().mode]:upper()
-end
+local function mode() return nvim_modes[vim.api.nvim_get_mode().mode]:upper() end
 
 -- Get the current git branch info
 local function git()
@@ -100,4 +98,4 @@ function StatusLine()
   }, ' ')
 end
 
-vim.opt.statusline = [[%!luaeval('StatusLine()')]]
+-- vim.opt.statusline = [[%!luaeval('StatusLine()')]]

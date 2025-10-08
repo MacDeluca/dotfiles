@@ -9,10 +9,11 @@ return {
       flavour = 'mocha',
       -- transparent_background = false,
       float = {
-        transparent = true
+        transparent = true,
       },
       custom_highlights = function(colours)
         return {
+          WinSeparator = { fg = colours.blue },
           -- blink higlights
           BlinkCmpMenu = { bg = colours.surface0 },
           BlinkCmpDoc = { bg = colours.mantle },

@@ -1,3 +1,5 @@
+vim.opt.statusline = '%{FugitiveStatusline()} %<%f %h%w%m%r%=%-14.(%l,%c%V%) %P'
+
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
@@ -11,8 +13,8 @@ vim.opt.relativenumber = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
--- Don't show the mode, since it's already in status line
-vim.opt.showmode = false
+-- -- Don't show the mode, since it's already in status line
+-- vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -33,8 +35,9 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
 
--- Default update time :help updatetime
-vim.opt.updatetime = 4000
+-- -- Default update time :help updatetime
+-- vim.opt.updatetime = 4000
+vim.opt.swapfile = false
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
@@ -81,25 +84,3 @@ vim.filetype.add({
 })
 
 vim.o.winborder = 'single'
-
--- -- Specify how the floating borders look
--- local border = {
---   { '╭', 'FloatBorder' },
---   { '─', 'FloatBorder' },
---   { '╮', 'FloatBorder' },
---   { '│', 'FloatBorder' },
---   { '╯', 'FloatBorder' },
---   { '─', 'FloatBorder' },
---   { '╰', 'FloatBorder' },
---   { '│', 'FloatBorder' },
--- }
---
--- -- Override the default open_floating_preview to use the border
--- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
---
--- ---@diagnostic disable-next-line: duplicate-set-field
--- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
---   opts = opts or {}
---   opts.border = opts.border or border
---   return orig_util_open_floating_preview(contents, syntax, opts, ...)
--- end

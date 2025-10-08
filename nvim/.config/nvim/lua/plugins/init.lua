@@ -21,7 +21,7 @@ local plugins = {
     config = true,
     opts = {
       enable_check_bracket_line = true,
-      ignored_next_char = '[%w%.%{%(%[]',
+      ignored_next_char = '[%w%.%{%(%[%"%\']',
     },
   },
   {
@@ -38,7 +38,7 @@ local plugins = {
       enable = true,
       autoresize = {
         minheight = 10,
-        minwidth = 40,
+        minwidth = 30,
       },
       ui = {
         signcolumn = false,
@@ -46,20 +46,20 @@ local plugins = {
       },
     },
   },
-  {
-    -- :TodoQuickFix
-    -- TABLE OF CONTENTS:
-    -- PERF:
-    -- HACK:
-    -- TODO:
-    -- NOTE:
-    -- FIX:
-    -- WARNING:
-    'folke/todo-comments.nvim',
-    event = 'VeryLazy',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { signs = false },
-  },
+  -- {
+  --   -- :TodoQuickFix
+  --   -- TABLE OF CONTENTS:
+  --   -- PERF:
+  --   -- HACK:
+  --   -- TODO:
+  --   -- NOTE:
+  --   -- FIX:
+  --   -- WARNING:
+  --   'folke/todo-comments.nvim',
+  --   event = 'VeryLazy',
+  --   dependencies = { 'nvim-lua/plenary.nvim' },
+  --   opts = { signs = false },
+  -- },
 }
 
 return plugins

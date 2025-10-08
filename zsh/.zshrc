@@ -6,6 +6,7 @@ PS1='%F{blue}%~ %(?.%F{green}.%F{red})%#%f '
 
 # Aliases
 alias vim='nvim'
+alias vimnew='NVIM_APPNAME=nvim_new nvim'
 alias :q='exit'
 alias la='ls -A'
 alias ls='ls --color=auto'
