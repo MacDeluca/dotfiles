@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "blink.cmp": [],
+    "catppuccin": {
+      "rev": "af58927",
+      "src": "https://github.com/catppuccin/nvim.git"
+    },
+    "fugitive": [],
+    "nvim-treesitter": [],
+    "oil.nvim": [],
+    "snacks.nvim": {
+      "rev": "0760abd",
+      "src": "https://github.com/folke/snacks.nvim.git"
+    },
+    "vim-tmux-navigator": []
+  }
+}

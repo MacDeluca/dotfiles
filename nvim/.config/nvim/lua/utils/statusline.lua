@@ -98,4 +98,4 @@ function StatusLine()
   }, ' ')
 end
 
--- vim.opt.statusline = [[%!luaeval('StatusLine()')]]
+vim.opt.statusline = [[%!luaeval('StatusLine()')]]

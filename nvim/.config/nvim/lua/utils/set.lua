@@ -1,5 +1,3 @@
-vim.opt.statusline = '%{FugitiveStatusline()} %<%f %h%w%m%r%=%-14.(%l,%c%V%) %P'
-
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
