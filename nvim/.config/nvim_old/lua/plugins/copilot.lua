@@ -13,9 +13,9 @@ return {
         auto_trigger = true,
         debounce = 25,
         keymap = {
-          accept = '<C-y>',
-          next = '<C-n>',
-          prev = '<C-p>',
+          accept = '<C-Y>',
+          next = '<C-N>',
+          prev = '<C-P>',
         },
       },
       filetypes = {
