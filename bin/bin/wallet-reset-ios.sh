@@ -5,10 +5,6 @@ echo "Resetting iOS build environment..."
 echo "Killing connected usb devices"
 killall -9 usbmuxd
 
-echo "Restarting Watchman"
-watchman shutdown-server
-watchman watch-del-all
-
 echo "Removing DerivedData..."
 rm -rf ~/Library/Developer/Xcode/DerivedData
 

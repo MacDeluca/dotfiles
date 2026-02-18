@@ -6,6 +6,9 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+-- https://wezterm.org/config/lua/config/term.html (fixes issue with screen tearing)
+config.term = "wezterm"
+
 config.default_cursor_style = "SteadyBar"
 
 -- This is where you actually apply your config choices.

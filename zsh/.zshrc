@@ -31,3 +31,5 @@ export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
 export PATH=~/Library/Android/sdk/platform-tools:/opt/homebrew/opt/openjdk@17/bin:/Users/macd/.rbenv/shims:/Users/macd/.rbenv/bin:/Users/macd/.nvm/versions/node/v20.19.2/bin:/Users/macd/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Users/macd/.rbenv/shims:/Users/macd/.rbenv/bin:/Users/macd/.nvm/versions/node/v20.19.2/bin:/Users/macd/bin
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH=$PATH:$HOME/.maestro/bin
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

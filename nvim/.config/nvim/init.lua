@@ -107,8 +107,10 @@ require("snacks").setup({
 require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
-    typescript = { "prettierd" },
-    typescriptreact = { "prettierd" },
+    javascript = { "prettierd", "eslint" },
+    javascriptreact = { "prettierd", "eslint" },
+    typescript = { "prettierd", "eslint" },
+    typescriptreact = { "prettierd", "eslint" },
     cs = { "csharpier" },
     kt = {},
   },
@@ -154,7 +156,7 @@ vim.keymap.set("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>")
 vim.keymap.set("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>")
 vim.keymap.set("n", "<leader>j", "<cmd>diffget //3<CR>")
 vim.keymap.set("n", "<leader>f", "<cmd>diffget //2<CR>")
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+vim.keymap.set("n", "<leader>gs", function() vim.cmd("Git | normal! 4j") end)
 vim.keymap.set("n", "<leader>gc", ":Git commit -n -s -m ''<Left>")
 vim.keymap.set("n", "<leader>gb", function() require("snacks").picker.git_branches() end)
 vim.keymap.set("n", "<leader>ph", function() require("snacks").picker.recent() end)
@@ -205,7 +207,17 @@ vim.lsp.config("eslint", {
   },
 })
 
-vim.lsp.enable({ "lua_ls", "ts_ls", "eslint", "sourcekit" })
+-- vim.lsp.config("kotlin_language_server", {
+--   filetypes = { "kotlin" },
+--   cmd = { "kotlin-language-server" },
+-- })
+
+vim.lsp.config("sourcekit", {
+  filetypes = { "swift" },
+  cmd = { "sourcekit-lsp" },
+})
+
+vim.lsp.enable({ "lua_ls", "ts_ls", "eslint", "sourcekit", "kotlin_language_server" })
 
 vim.api.nvim_create_user_command("UpdatePackages", function()
   local package_names = {}
