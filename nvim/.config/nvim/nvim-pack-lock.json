@@ -28,6 +28,10 @@
       "rev": "61b51c0",
       "src": "https://tpope.io/vim/fugitive.git"
     },
+    "mason": {
+      "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
     "nvim": {
       "rev": "e79d09fa347b367e0e7f693bfe87dba932a8cbd1",
       "src": "https://github.com/catppuccin/nvim.git"

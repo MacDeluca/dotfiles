@@ -38,6 +38,7 @@ local packages = {
   { src = "https://github.com/neovim/nvim-lspconfig", name = "nvim-lspconfig" },
   { src = "https://github.com/stevearc/conform.nvim", name = "conform" },
   { src = "https://github.com/zbirenbaum/copilot.lua", name = "copilot" },
+  { src = "https://github.com/mason-org/mason.nvim", name = "mason" },
 }
 vim.pack.add(packages)
 vim.cmd.packadd("nvim.undotree") -- :Undotree
@@ -66,6 +67,8 @@ vim.api.nvim_set_hl(0, "SLError", { fg = palette.red })
 vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = palette.surface0 })
 vim.api.nvim_set_hl(0, "WinSeparator", { fg = palette.mauve })
 vim.api.nvim_set_hl(0, "FloatBorder", { fg = palette.lavender })
+
+require("mason").setup()
 
 require("blink.cmp").setup({
   completion = {
